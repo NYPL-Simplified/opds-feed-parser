@@ -1,7 +1,7 @@
 ///<reference path="../typings/underscore/underscore.d.ts"/>
 import _ = require("underscore");
-import OPDSFeed from "../src/opds_feed";
-import OPDSLinkParser from "../src/opds_link_parser";
+import OPDSFeed from "./opds_feed";
+import OPDSLinkParser from "./opds_link_parser";
 
 let opdsLinkParser = new OPDSLinkParser();
 

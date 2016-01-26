@@ -1,4 +1,4 @@
-import OPDSLink from "../src/opds_link";
+import OPDSLink from "./opds_link";
 
 export default class OPDSFeed {
   links: Array<OPDSLink>;

@@ -1,7 +1,7 @@
 ///<reference path="../typings/core-js/core-js.d.ts"/>
 ///<reference path="../typings/xml2js/xml2js.d.ts"/>
-import OPDSFeed from "../src/opds_feed";
-import OPDSFeedParser from "../src/opds_feed_parser";
+import OPDSFeed from "./opds_feed";
+import OPDSFeedParser from "./opds_feed_parser";
 import xml2js = require("xml2js");
 
 let xmlParser = new xml2js.Parser({xmlns: true});
