@@ -2,11 +2,12 @@
 import _ = require("underscore");
 import OPDSFeed from "./opds_feed";
 import OPDSLinkParser from "./opds_link_parser";
+import XMLInterface = require("./xml_interface");
 
 let opdsLinkParser = new OPDSLinkParser();
 
 export default class OPDSFeedParser {
-  parse(feed: any): OPDSFeed {
+  parse(feed: XMLInterface.XMLFeed): OPDSFeed {
     let namespaces = feed["$"];
     let atomNamespace = _.find(_.values(namespaces), (ns) => {
       return ns.value === "http://www.w3.org/2005/Atom";
