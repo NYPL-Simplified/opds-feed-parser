@@ -10,14 +10,15 @@
   "license": "Apache-2.0",
   "scripts": {
     "prepublish": "tsc",
-    "test": "mocha",
+    "test": "tslint -c tslint.json src/*.ts test/*.ts && mocha",
     "pretest": "tsc test/*.ts --module commonjs"
   },
   "devDependencies": {
     "chai": "^3.4.1",
     "mocha": "^2.3.4",
     "tsd": "^0.6.5",
-    "typescript": ">=1.7.5"
+    "tslint": "^3.3.0",
+    "typescript": "^1.7.5"
   },
   "dependencies": {
     "core-js": "^2.0.3",
