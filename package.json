@@ -1,0 +1,23 @@
+{
+  "name": "opds-parser",
+  "version": "1.0.0",
+  "description": "OPDS parser",
+  "author": "NYPL",
+  "license": "Apache-2.0",
+  "scripts": {
+    "prepublish": "tsc",
+    "test": "mocha",
+    "pretest": "tsc test/*.ts --module commonjs"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4",
+    "tsd": "^0.6.5",
+    "typescript": ">=1.7.5"
+  },
+  "dependencies": {
+    "core-js": "^2.0.3",
+    "requirejs": "^2.1.22",
+    "xml2js": "^0.4.16"
+  }
+}
