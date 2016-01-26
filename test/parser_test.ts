@@ -13,9 +13,29 @@ describe("Parser", () => {
   });
 
   describe("#parse", () => {
-    it("allows foreign markup", () => {
+    it("raises error when input has no feed", (done) => {
+      let opds = "<test></test>";
+      let promise: Promise<OPDSFeed> = parser.parse(opds);
+      promise.then(() => {
+        done("parser did not raise error for input with no feed");
+      }).catch((error) => {
+        done();
+      });
+    });
+
+    it("allows foreign markup", (done) => {
       // http://opds-spec.org/specs/opds-catalog-1-1-20110627/#Document_Extensibility
-      throw new Error("not implemented");
+      let opds = "<feed><test /></feed>";
+      let promise: Promise<OPDSFeed> = parser.parse(opds);
+      promise.then((result) => {
+        if (result) {
+          done();
+        } else {
+          done("parse did not return an OPDSFeed");
+        }
+      }).catch((error) => {
+        done(error);
+      });
     });
 
     it("extracts catalog root", (done) => {
