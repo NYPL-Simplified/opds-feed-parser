@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "OPDS parser",
   "author": "NYPL",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:NYPL-Simplified/opds-parser.git"
+  },
   "license": "Apache-2.0",
   "scripts": {
     "prepublish": "tsc",
