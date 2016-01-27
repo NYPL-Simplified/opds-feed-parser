@@ -5,6 +5,10 @@ export default class LinkParser {
   parse(link: XMLInterface.XMLLink): OPDSLink {
     let href = link["$"].href.value;
     let rel = link["$"].rel.value;
-    return new OPDSLink(href, rel);
+    let type: string;
+    if (link["$"].type) {
+      type = link["$"].type.value;
+    }
+    return new OPDSLink(href, rel, type);
   }
 }

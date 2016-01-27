@@ -6,6 +6,9 @@ export interface XMLLink {
     rel: {
       value: string
     };
+    type?: {
+      value: string
+    };
   };
 }
 
