@@ -18,15 +18,17 @@ describe("LinkParser", () => {
           "href": {"value": "test href"},
           "rel":  {"value": "test rel"},
           "type": {"value": "test type"},
+          "title": {"value": "test title"}
         }
       };
       let parsedLink = parser.parse(link);
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals("test rel");
       expect(parsedLink.type).to.equals("test type");
+      expect(parsedLink.title).to.equals("test title");
     });
 
-    it("allows no type", () => {
+    it("allows no type and title", () => {
       let link = {
         "$": {
           "href": {"value": "test href"},
@@ -37,6 +39,7 @@ describe("LinkParser", () => {
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals("test rel");
       expect(parsedLink.type).to.be.undefined;
+      expect(parsedLink.title).to.be.undefined;
     });
   });
 });

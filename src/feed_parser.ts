@@ -20,6 +20,12 @@ export default class FeedParser {
     let namespaces: Array<XMLInterface.XMLNamespace> = feed["$"];
     let atomPrefix: string = namespaceParser.atomPrefix(namespaces);
 
+    let title: string;
+    let rawTitle = feed[atomPrefix + "title"];
+    if (rawTitle && rawTitle.length > 0) {
+      title = rawTitle[0]["_"];
+    }
+
     let links: Array<OPDSLink>;
     let rawLinks = feed[atomPrefix + "link"];
     if (rawLinks) {
@@ -46,9 +52,9 @@ export default class FeedParser {
 
     });
     if (allEntriesHaveAcquisitionLinks) {
-      return new AcquisitionFeed(links);
+      return new AcquisitionFeed(title, links);
     } else {
-      return new NavigationFeed(links);
+      return new NavigationFeed(title, links);
     }
   }
 }

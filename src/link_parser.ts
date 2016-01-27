@@ -9,6 +9,10 @@ export default class LinkParser {
     if (link["$"].type) {
       type = link["$"].type.value;
     }
-    return new OPDSLink(href, rel, type);
+    let title: string;
+    if (link["$"].title) {
+      title = link["$"].title.value;
+    }
+    return new OPDSLink(href, rel, type, title);
   }
 }

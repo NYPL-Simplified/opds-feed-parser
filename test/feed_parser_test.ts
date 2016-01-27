@@ -38,6 +38,23 @@ describe("FeedParser", () => {
       expect(parsedLink.rel).to.equals("test rel");
     });
 
+    it("extracts title", () => {
+      let title = {
+        "_": "test title"
+      };
+      let feed = {
+        "$": {
+          "xmlns:atom": {
+            "value": NamespaceParser.ATOM_NAMESPACE_URI,
+            "local": "atom"
+          }
+        },
+        "atom:title": [title]
+      };
+      let parsedFeed = parser.parse(feed);
+      expect(parsedFeed.title).to.equals("test title");
+    });
+
     it("recognizes navigation feed", () => {
       let links = [{
         "$": {
