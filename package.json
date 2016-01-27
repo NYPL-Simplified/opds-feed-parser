@@ -9,6 +9,8 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "preinstall": "npm install tsd",
+    "postinstall": "tsd install",
     "prepublish": "tsc",
     "test": "tslint -c tslint.json src/*.ts test/*.ts && mocha",
     "pretest": "tsc test/*.ts --module commonjs"
