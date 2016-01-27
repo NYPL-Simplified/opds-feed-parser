@@ -19,5 +19,5 @@ export interface XMLNamespace {
 }
 
 export interface XMLFeed {
-  "$": Array<XMLNamespace>;
+  "$": any;
 }

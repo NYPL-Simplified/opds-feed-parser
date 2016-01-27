@@ -15,6 +15,7 @@ let opdsEntryParser = new OPDSEntryParser();
 let namespaceParser = new NamespaceParser();
 
 export default class OPDSFeedParser {
+  static OPDS_ACQUISITION_REL = "http://opds-spec.org/acquisition";
   parse(feed: XMLInterface.XMLFeed): OPDSFeed {
     let namespaces: Array<XMLInterface.XMLNamespace> = feed["$"];
     let atomPrefix: string = namespaceParser.atomPrefix(namespaces);
@@ -40,7 +41,7 @@ export default class OPDSFeedParser {
     }
     let allEntriesHaveAcquisitionLinks: boolean = entries.every((entry) => {
       return !!entry.links.find((link) => {
-        return link.rel === "http://opds-spec.org/acquisition";
+        return link.rel === OPDSFeedParser.OPDS_ACQUISITION_REL;
       });
 
     });
