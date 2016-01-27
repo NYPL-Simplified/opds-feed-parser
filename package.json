@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "core-js": "^2.0.3",
+    "immutable": "^3.7.6",
     "requirejs": "^2.1.22",
-    "underscore": "^1.8.3",
     "xml2js": "^0.4.16"
   }
 }

@@ -2,6 +2,15 @@
 Javascript OPDS feed parser
 
 
+## Setup
+```
+npm install -g tsd
+tsd reinstall
+npm install
+npm test
+```
+
+
 ## License
 
 ```

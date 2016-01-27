@@ -9,6 +9,10 @@ export interface XMLLink {
   };
 }
 
+export interface XMLEntry {
+  "$"?: any;
+}
+
 export interface XMLNamespace {
   value: string;
   local: string;
