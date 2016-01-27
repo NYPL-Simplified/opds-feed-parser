@@ -5,16 +5,16 @@ import OPDSLink from "./opds_link";
 import OPDSEntry from "./opds_entry";
 import NavigationFeed from "./navigation_feed";
 import AcquisitionFeed from "./acquisition_feed";
-import OPDSLinkParser from "./opds_link_parser";
-import OPDSEntryParser from "./opds_entry_parser";
+import LinkParser from "./link_parser";
+import EntryParser from "./entry_parser";
 import NamespaceParser from "./namespace_parser";
 import XMLInterface = require("./xml_interface");
 
-let opdsLinkParser = new OPDSLinkParser();
-let opdsEntryParser = new OPDSEntryParser();
+let linkParser = new LinkParser();
+let entryParser = new EntryParser();
 let namespaceParser = new NamespaceParser();
 
-export default class OPDSFeedParser {
+export default class FeedParser {
   static OPDS_ACQUISITION_REL = "http://opds-spec.org/acquisition";
   parse(feed: XMLInterface.XMLFeed): OPDSFeed {
     let namespaces: Array<XMLInterface.XMLNamespace> = feed["$"];
@@ -24,7 +24,7 @@ export default class OPDSFeedParser {
     let rawLinks = feed[atomPrefix + "link"];
     if (rawLinks) {
       links = rawLinks.map((link) => {
-        return opdsLinkParser.parse(link);
+        return linkParser.parse(link);
       });
     } else {
       links = [];
@@ -34,14 +34,14 @@ export default class OPDSFeedParser {
     let rawEntries = feed[atomPrefix + "entry"];
     if (rawEntries) {
       entries = rawEntries.map((entry) => {
-        return opdsEntryParser.parse(entry, atomPrefix);
+        return entryParser.parse(entry, atomPrefix);
       });
     } else {
       entries = [];
     }
     let allEntriesHaveAcquisitionLinks: boolean = entries.every((entry) => {
       return !!entry.links.find((link) => {
-        return link.rel === OPDSFeedParser.OPDS_ACQUISITION_REL;
+        return link.rel === FeedParser.OPDS_ACQUISITION_REL;
       });
 
     });

@@ -1,14 +1,14 @@
 ///<reference path="../typings/mocha/mocha.d.ts" />
 ///<reference path="../typings/chai/chai.d.ts" />
-import OPDSLinkParser from "../src/opds_link_parser";
+import LinkParser from "../src/link_parser";
 import chai = require("chai");
 let expect = chai.expect;
 
-describe("OPDSLinkParser", () => {
-  let parser: OPDSLinkParser;
+describe("LinkParser", () => {
+  let parser: LinkParser;
 
   beforeEach(() => {
-    parser = new OPDSLinkParser();
+    parser = new LinkParser();
   });
 
   describe("#parse", () => {

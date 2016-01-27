@@ -1,17 +1,17 @@
 ///<reference path="../typings/mocha/mocha.d.ts" />
 ///<reference path="../typings/chai/chai.d.ts" />
-import OPDSFeedParser from "../src/opds_feed_parser";
+import FeedParser from "../src/feed_parser";
 import AcquisitionFeed from "../src/acquisition_feed";
 import NavigationFeed from "../src/navigation_feed";
 import NamespaceParser from "../src/namespace_parser";
 import chai = require("chai");
 let expect = chai.expect;
 
-describe("OPDSFeedParser", () => {
-  let parser: OPDSFeedParser;
+describe("FeedParser", () => {
+  let parser: FeedParser;
 
   beforeEach(() => {
-    parser = new OPDSFeedParser();
+    parser = new FeedParser();
   });
 
   describe("#parse", () => {
@@ -66,7 +66,7 @@ describe("OPDSFeedParser", () => {
       let links = [{
         "$": {
           "href": {"value": "test href"},
-          "rel":  {"value": OPDSFeedParser.OPDS_ACQUISITION_REL}
+          "rel":  {"value": FeedParser.OPDS_ACQUISITION_REL}
         }
       }];
       let entry = {

@@ -3,15 +3,15 @@
 import OPDSFeed from "../src/opds_feed";
 import NavigationFeed from "../src/navigation_feed";
 import AcquisitionFeed from "../src/acquisition_feed";
-import Parser from "../src/opds_parser";
+import OPDSParser from "../src/opds_parser";
 import chai = require("chai");
 let expect = chai.expect;
 
-describe("Parser", () => {
-  let parser: Parser;
+describe("OPDSParser", () => {
+  let parser: OPDSParser;
 
   beforeEach(() => {
-    parser = new Parser();
+    parser = new OPDSParser();
   });
 
   describe("#parse", () => {
