@@ -10,15 +10,17 @@ import EntryParser from "./entry_parser";
 import NamespaceParser from "./namespace_parser";
 import XMLInterface = require("./xml_interface");
 
-let linkParser = new LinkParser();
-let entryParser = new EntryParser();
 let namespaceParser = new NamespaceParser();
 
 export default class FeedParser {
   static OPDS_ACQUISITION_REL = "http://opds-spec.org/acquisition";
   parse(feed: XMLInterface.XMLFeed): OPDSFeed {
     let namespaces: Array<XMLInterface.XMLNamespace> = feed["$"];
-    let atomPrefix: string = namespaceParser.atomPrefix(namespaces);
+    let prefixes: Immutable.Map<string, string> = namespaceParser.prefixes(namespaces);
+    let atomPrefix = prefixes[NamespaceParser.ATOM_URI];
+
+    let linkParser = new LinkParser(prefixes);
+    let entryParser = new EntryParser(prefixes);
 
     let title: string;
     let rawTitle = feed[atomPrefix + "title"];
@@ -40,7 +42,7 @@ export default class FeedParser {
     let rawEntries = feed[atomPrefix + "entry"];
     if (rawEntries) {
       entries = rawEntries.map((entry) => {
-        return entryParser.parse(entry, atomPrefix);
+        return entryParser.parse(entry);
       });
     } else {
       entries = [];

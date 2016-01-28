@@ -3,12 +3,19 @@ import Immutable = require("immutable");
 import OPDSEntry from "./opds_entry";
 import OPDSLink from "./opds_link";
 import LinkParser from "./link_parser";
+import NamespaceParser from "./namespace_parser";
 import XMLInterface = require("./xml_interface");
 
-let linkParser = new LinkParser();
-
 export default class EntryParser {
-  parse(entry: XMLInterface.XMLEntry, atomPrefix: string): OPDSEntry {
+  private prefixes: Immutable.Map<string, string>;
+  constructor(prefixes: Immutable.Map<string, string>) {
+    this.prefixes = prefixes;
+  }
+
+  parse(entry: XMLInterface.XMLEntry): OPDSEntry {
+    let linkParser = new LinkParser(this.prefixes);
+    let atomPrefix = this.prefixes[NamespaceParser.ATOM_URI];
+
     let rawLinks = entry[atomPrefix + "link"];
     let links: Array<OPDSLink>;
     if (rawLinks) {

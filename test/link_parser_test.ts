@@ -1,6 +1,9 @@
 ///<reference path="../typings/mocha/mocha.d.ts" />
 ///<reference path="../typings/chai/chai.d.ts" />
+///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
+import Immutable = require("immutable");
 import LinkParser from "../src/link_parser";
+import NamespaceParser from "../src/namespace_parser";
 import OPDSCatalogRootLink from "../src/opds_catalog_root_link";
 import OPDSFacetLink from "../src/opds_facet_link";
 import chai = require("chai");
@@ -10,7 +13,9 @@ describe("LinkParser", () => {
   let parser: LinkParser;
 
   beforeEach(() => {
-    parser = new LinkParser();
+    let prefixes = Immutable.Map<string, string>();
+    prefixes[NamespaceParser.ATOM_URI] = "atom:";
+    parser = new LinkParser(prefixes);
   });
 
   describe("#parse", () => {

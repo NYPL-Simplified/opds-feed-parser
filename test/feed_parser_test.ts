@@ -25,7 +25,7 @@ describe("FeedParser", () => {
       let feed = {
         "$": {
           "xmlns:atom": {
-            "value": NamespaceParser.ATOM_NAMESPACE_URI,
+            "value": NamespaceParser.ATOM_URI,
             "local": "atom"
           }
         },
@@ -45,7 +45,7 @@ describe("FeedParser", () => {
       let feed = {
         "$": {
           "xmlns:atom": {
-            "value": NamespaceParser.ATOM_NAMESPACE_URI,
+            "value": NamespaceParser.ATOM_URI,
             "local": "atom"
           }
         },
@@ -68,7 +68,7 @@ describe("FeedParser", () => {
       let feed = {
         "$": {
           "xmlns:atom": {
-            "value": NamespaceParser.ATOM_NAMESPACE_URI,
+            "value": NamespaceParser.ATOM_URI,
             "local": "atom"
           }
         },
@@ -92,7 +92,7 @@ describe("FeedParser", () => {
       let feed = {
         "$": {
           "xmlns:atom": {
-            "value": NamespaceParser.ATOM_NAMESPACE_URI,
+            "value": NamespaceParser.ATOM_URI,
             "local": "atom"
           }
         },

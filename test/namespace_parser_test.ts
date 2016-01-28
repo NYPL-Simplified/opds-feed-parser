@@ -11,26 +11,28 @@ describe("NamespaceParser", () => {
     parser = new NamespaceParser();
   });
 
-  describe("#atomPrefix", () => {
+  describe("#prefixes", () => {
     it("returns empty string for no prefix", () => {
       let namespaces = {
         "xmlns": {
-          "value": NamespaceParser.ATOM_NAMESPACE_URI,
+          "value": NamespaceParser.ATOM_URI,
           "local": ""
         }
       };
-      let atomPrefix = parser.atomPrefix(namespaces);
+      let prefixes = parser.prefixes(namespaces);
+      let atomPrefix = prefixes[NamespaceParser.ATOM_URI];
       expect(atomPrefix).to.equals("");
     });
 
     it("returns prefix with colon", () => {
       let namespaces = {
         "xmlns:atom": {
-          "value": NamespaceParser.ATOM_NAMESPACE_URI,
+          "value": NamespaceParser.ATOM_URI,
           "local": "atom"
         }
       };
-      let atomPrefix = parser.atomPrefix(namespaces);
+      let prefixes = parser.prefixes(namespaces);
+      let atomPrefix = prefixes[NamespaceParser.ATOM_URI];
       expect(atomPrefix).to.equals("atom:");
     });
   });
