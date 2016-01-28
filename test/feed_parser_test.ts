@@ -4,6 +4,7 @@ import FeedParser from "../src/feed_parser";
 import AcquisitionFeed from "../src/acquisition_feed";
 import NavigationFeed from "../src/navigation_feed";
 import NamespaceParser from "../src/namespace_parser";
+import OPDSAcquisitionLink from "../src/opds_acquisition_link";
 import chai = require("chai");
 let expect = chai.expect;
 
@@ -83,7 +84,7 @@ describe("FeedParser", () => {
       let links = [{
         "$": {
           "href": {"value": "test href"},
-          "rel":  {"value": FeedParser.OPDS_ACQUISITION_REL}
+          "rel":  {"value": OPDSAcquisitionLink.REL}
         }
       }];
       let entry = {

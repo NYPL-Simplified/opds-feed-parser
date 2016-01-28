@@ -4,6 +4,7 @@ import OPDSLink from "./opds_link";
 import OPDSCatalogRootLink from "./opds_catalog_root_link";
 import OPDSFacetLink from "./opds_facet_link";
 import SearchLink from "./search_link";
+import OPDSAcquisitionLink from "./opds_acquisition_link";
 import NamespaceParser from "./namespace_parser";
 import XMLInterface = require("./xml_interface");
 
@@ -66,6 +67,8 @@ export default class LinkParser {
       }
 
       return new SearchLink(href, type, title, totalResults, startIndex, itemsPerPage);
+    } else if (rel === OPDSAcquisitionLink.REL) {
+      return new OPDSAcquisitionLink(href, type, title);
     } else {
       return new OPDSLink(href, rel, type, title);
     }

@@ -2,6 +2,7 @@
 import Immutable = require("immutable");
 import OPDSFeed from "./opds_feed";
 import OPDSLink from "./opds_link";
+import OPDSAcquisitionLink from "./opds_acquisition_link";
 import OPDSEntry from "./opds_entry";
 import NavigationFeed from "./navigation_feed";
 import AcquisitionFeed from "./acquisition_feed";
@@ -13,7 +14,6 @@ import XMLInterface = require("./xml_interface");
 let namespaceParser = new NamespaceParser();
 
 export default class FeedParser {
-  static OPDS_ACQUISITION_REL = "http://opds-spec.org/acquisition";
   parse(feed: XMLInterface.XMLFeed): OPDSFeed {
     let namespaces: Array<XMLInterface.XMLNamespace> = feed["$"];
     let prefixes: Immutable.Map<string, string> = namespaceParser.prefixes(namespaces);
@@ -49,7 +49,7 @@ export default class FeedParser {
     }
     let allEntriesHaveAcquisitionLinks: boolean = entries.every((entry) => {
       return !!entry.links.find((link) => {
-        return link.rel === FeedParser.OPDS_ACQUISITION_REL;
+        return (link instanceof OPDSAcquisitionLink);
       });
 
     });
