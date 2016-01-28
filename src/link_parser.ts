@@ -3,6 +3,7 @@ import Immutable = require("immutable");
 import OPDSLink from "./opds_link";
 import OPDSCatalogRootLink from "./opds_catalog_root_link";
 import OPDSFacetLink from "./opds_facet_link";
+import SearchLink from "./search_link";
 import NamespaceParser from "./namespace_parser";
 import XMLInterface = require("./xml_interface");
 
@@ -46,6 +47,25 @@ export default class LinkParser {
       }
 
       return new OPDSFacetLink(href, type, title, facetGroup, activeFacet, count);
+    } else if (rel === SearchLink.REL) {
+      let openSearchPrefix = this.prefixes[NamespaceParser.OPEN_SEARCH_URI];
+
+      let totalResults: number;
+      if (link["$"][openSearchPrefix + "totalResults"]) {
+        totalResults = parseInt(link["$"][openSearchPrefix + "totalResults"].value, 10);
+      }
+
+      let startIndex: number;
+      if (link["$"][openSearchPrefix + "startIndex"]) {
+        startIndex = parseInt(link["$"][openSearchPrefix + "startIndex"].value, 10);
+      }
+
+      let itemsPerPage: number;
+      if (link["$"][openSearchPrefix + "itemsPerPage"]) {
+        itemsPerPage = parseInt(link["$"][openSearchPrefix + "itemsPerPage"].value, 10);
+      }
+
+      return new SearchLink(href, type, title, totalResults, startIndex, itemsPerPage);
     } else {
       return new OPDSLink(href, rel, type, title);
     }
