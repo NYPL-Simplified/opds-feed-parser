@@ -54,9 +54,9 @@ export default class FeedParser {
 
     });
     if (allEntriesHaveAcquisitionLinks) {
-      return new AcquisitionFeed(title, links);
+      return new AcquisitionFeed(title, entries, links);
     } else {
-      return new NavigationFeed(title, links);
+      return new NavigationFeed(title, entries, links);
     }
   }
 }

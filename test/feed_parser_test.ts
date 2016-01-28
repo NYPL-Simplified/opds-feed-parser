@@ -16,6 +16,28 @@ describe("FeedParser", () => {
   });
 
   describe("#parse", () => {
+    it("extracts entries", () => {
+      let entries = [{
+        "atom:id": [{"_": "test id"}],
+        "atom:title": [{"_": "test title"}]
+      }];
+
+      let feed = {
+        "$": {
+          "xmlns:atom": {
+            "value": NamespaceParser.ATOM_URI,
+            "local": "atom"
+          }
+        },
+        "atom:entry": entries
+      };
+      let parsedFeed = parser.parse(feed);
+      expect(parsedFeed.entries.length).to.equals(1);
+      let parsedEntry = parsedFeed.entries[0];
+      expect(parsedEntry.title).to.equals("test title");
+      expect(parsedEntry.id).to.equals("test id");
+    });
+
     it("extracts links", () => {
       let links = [{
         "$": {
