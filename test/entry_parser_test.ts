@@ -42,6 +42,21 @@ describe("EntryParser", () => {
       expect(parsedEntry.title).to.equals("test title");
     });
 
+    it("extracts authors", () => {
+      let authors = [{
+        "name": [{"_": "test name"}],
+        "uri": [{"_": "test uri"}]
+      }];
+      let entry = {
+        "atom:author": authors
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.authors.length).to.equals(1);
+      let parsedAuthor = parsedEntry.authors[0];
+      expect(parsedAuthor.name).to.equals("test name");
+      expect(parsedAuthor.uri).to.equals("test uri");
+    });
+
     it("extracts links", () => {
       let links = [{
         "$": {

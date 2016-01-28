@@ -2,7 +2,9 @@
 import Immutable = require("immutable");
 import OPDSEntry from "./opds_entry";
 import OPDSLink from "./opds_link";
+import Author from "./author";
 import LinkParser from "./link_parser";
+import AuthorParser from "./author_parser";
 import NamespaceParser from "./namespace_parser";
 import XMLInterface = require("./xml_interface");
 
@@ -35,6 +37,15 @@ export default class EntryParser {
       title = rawTitle[0]["_"];
     }
 
+    let authors: Array<Author>;
+    let rawAuthors = entry[atomPrefix + "author"];
+    if (rawAuthors && rawAuthors.length > 0) {
+      let authorParser = new AuthorParser(this.prefixes);
+      authors = rawAuthors.map((author) => {
+        return authorParser.parse(author);
+      });
+    }
+
     let rawLinks = entry[atomPrefix + "link"];
     let links: Array<OPDSLink>;
     if (rawLinks) {
@@ -58,6 +69,6 @@ export default class EntryParser {
     if (rawIssued && rawIssued.length > 0) {
       issued = rawIssued[0]["_"];
     }
-    return new OPDSEntry(id, updated, title, links, identifiers, issued);
+    return new OPDSEntry(id, updated, title, authors, links, identifiers, issued);
   }
 }
