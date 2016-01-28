@@ -13,10 +13,35 @@ describe("EntryParser", () => {
   beforeEach(() => {
     let prefixes = Immutable.Map<string, string>();
     prefixes[NamespaceParser.ATOM_URI] = "atom:";
+    prefixes[NamespaceParser.DC_URI] = "dc:";
     parser = new EntryParser(prefixes);
   });
 
   describe("#parse", () => {
+    it("extracts id", () => {
+      let entry = {
+        "atom:id": [{"_": "test id"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.id).to.equals("test id");
+    });
+
+    it("extracts updated", () => {
+      let entry = {
+        "atom:updated": [{"_": "2016-01-01"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.updated).to.equals("2016-01-01");
+    });
+
+    it("extracts title", () => {
+      let entry = {
+        "atom:title": [{"_": "test title"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.title).to.equals("test title");
+    });
+
     it("extracts links", () => {
       let links = [{
         "$": {
@@ -32,6 +57,27 @@ describe("EntryParser", () => {
       let parsedLink = parsedEntry.links[0];
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals("test rel");
+    });
+
+    it("extracts identifiers", () => {
+      let identifiers = [{
+        "_": "test identifier"
+      }];
+      let entry = {
+        "dc:identifier": identifiers
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.identifiers.length).to.equals(1);
+      let parsedIdentifier = parsedEntry.identifiers[0];
+      expect(parsedIdentifier).to.equals("test identifier");
+    });
+
+    it("extracts issued", () => {
+      let entry = {
+        "dc:issued": [{"_": "2016-01-01"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.issued).to.equals("2016-01-01");
     });
   });
 });
