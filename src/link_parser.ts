@@ -3,6 +3,7 @@ import Immutable = require("immutable");
 import OPDSLink from "./opds_link";
 import OPDSCatalogRootLink from "./opds_catalog_root_link";
 import OPDSFacetLink from "./opds_facet_link";
+import NamespaceParser from "./namespace_parser";
 import XMLInterface = require("./xml_interface");
 
 export default class LinkParser {
@@ -26,7 +27,25 @@ export default class LinkParser {
     if (rel === OPDSCatalogRootLink.REL) {
        return new OPDSCatalogRootLink(href, type, title);
     } else if (rel === OPDSFacetLink.REL) {
-      return new OPDSFacetLink(href, type, title);
+      let opdsPrefix = this.prefixes[NamespaceParser.OPDS_URI];
+
+      let facetGroup: string;
+      if (link["$"][opdsPrefix + "facetGroup"]) {
+        facetGroup = link["$"][opdsPrefix + "facetGroup"].value;
+      }
+
+      let activeFacet: boolean;
+      if (link["$"][opdsPrefix + "activeFacet"]) {
+        activeFacet = (link["$"][opdsPrefix + "activeFacet"].value === "true");
+      }
+
+      let count: number;
+      let thrPrefix = this.prefixes[NamespaceParser.THR_URI];
+      if (link["$"][thrPrefix + "count"]) {
+        count = parseInt(link["$"][thrPrefix + "count"].value, 10);
+      }
+
+      return new OPDSFacetLink(href, type, title, facetGroup, activeFacet, count);
     } else {
       return new OPDSLink(href, rel, type, title);
     }

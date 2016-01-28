@@ -14,7 +14,8 @@ describe("LinkParser", () => {
 
   beforeEach(() => {
     let prefixes = Immutable.Map<string, string>();
-    prefixes[NamespaceParser.ATOM_URI] = "atom:";
+    prefixes[NamespaceParser.OPDS_URI] = "opds:";
+    prefixes[NamespaceParser.THR_URI] = "thr:";
     parser = new LinkParser(prefixes);
   });
 
@@ -66,13 +67,19 @@ describe("LinkParser", () => {
       let link = {
         "$": {
           "href": {"value": "test href"},
-          "rel": {"value": OPDSFacetLink.REL}
+          "rel": {"value": OPDSFacetLink.REL},
+          "opds:facetGroup": {"value": "test facet group"},
+          "opds:activeFacet": {"value": "false"},
+          "thr:count": {"value": "57"}
         }
       };
-      let parsedLink = parser.parse(link);
+      let parsedLink = <OPDSFacetLink>parser.parse(link);
       expect(parsedLink instanceof OPDSFacetLink).to.be.true;
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals(OPDSFacetLink.REL);
+      expect(parsedLink.facetGroup).to.equals("test facet group");
+      expect(parsedLink.activeFacet).to.be.false;
+      expect(parsedLink.count).to.equals(57);
     });
   });
 });
