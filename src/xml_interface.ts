@@ -15,6 +15,10 @@ export interface XMLLink {
   };
 }
 
+export interface XMLCategory {
+  "$"?: any;
+}
+
 export interface XMLEntry {
   "$"?: any;
 }

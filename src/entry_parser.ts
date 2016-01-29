@@ -3,8 +3,10 @@ import Immutable = require("immutable");
 import OPDSEntry from "./opds_entry";
 import OPDSLink from "./opds_link";
 import Author from "./author";
+import Category from "./category";
 import LinkParser from "./link_parser";
 import AuthorParser from "./author_parser";
+import CategoryParser from "./category_parser";
 import NamespaceParser from "./namespace_parser";
 import XMLInterface = require("./xml_interface");
 
@@ -44,11 +46,13 @@ export default class EntryParser {
       authors = rawAuthors.map((author) => {
         return authorParser.parse(author);
       });
+    } else {
+      authors = [];
     }
 
     let rawLinks = entry[atomPrefix + "link"];
     let links: Array<OPDSLink>;
-    if (rawLinks) {
+    if (rawLinks && rawLinks.length > 0) {
       links = rawLinks.map((link) => {
         return linkParser.parse(link);
       });
@@ -56,12 +60,25 @@ export default class EntryParser {
       links = [];
     }
 
+    let rawCategories = entry[atomPrefix + "category"];
+    let categories: Array<Category>;
+    if (rawCategories && rawCategories.length > 0) {
+      let categoryParser = new CategoryParser(this.prefixes);
+      categories = rawCategories.map((category) => {
+        return categoryParser.parse(category);
+      });
+    } else {
+      categories = [];
+    }
+
     let rawIdentifiers = entry[dcPrefix + "identifier"];
     let identifiers: Array<string>;
-    if (rawIdentifiers) {
+    if (rawIdentifiers && rawIdentifiers.length > 0) {
       identifiers = rawIdentifiers.map((identifier) => {
         return identifier["_"];
       });
+    } else {
+      identifiers = [];
     }
 
     let issued: string;
@@ -69,6 +86,6 @@ export default class EntryParser {
     if (rawIssued && rawIssued.length > 0) {
       issued = rawIssued[0]["_"];
     }
-    return new OPDSEntry(id, updated, title, authors, links, identifiers, issued);
+    return new OPDSEntry(id, updated, title, authors, links, categories, identifiers, issued);
   }
 }

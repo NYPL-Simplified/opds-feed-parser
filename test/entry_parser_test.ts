@@ -57,6 +57,25 @@ describe("EntryParser", () => {
       expect(parsedAuthor.uri).to.equals("test uri");
     });
 
+    it("extracts categories", () => {
+      let categories = [{
+        "$": {
+          "term": {"value": "test term"},
+          "scheme":  {"value": "test scheme"},
+          "label": {"value": "test label"}
+        }
+      }];
+      let entry = {
+        "atom:category": categories
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.categories.length).to.equals(1);
+      let parsedCategory = parsedEntry.categories[0];
+      expect(parsedCategory.term).to.equals("test term");
+      expect(parsedCategory.scheme).to.equals("test scheme");
+      expect(parsedCategory.label).to.equals("test label");
+    });
+
     it("extracts links", () => {
       let links = [{
         "$": {
