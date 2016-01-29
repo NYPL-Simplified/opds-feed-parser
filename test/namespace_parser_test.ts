@@ -14,9 +14,11 @@ describe("NamespaceParser", () => {
   describe("#prefixes", () => {
     it("returns empty string for no prefix", () => {
       let namespaces = {
-        "xmlns": {
-          "value": NamespaceParser.ATOM_URI,
-          "local": ""
+        "$": {
+          "xmlns": {
+            "value": NamespaceParser.ATOM_URI,
+            "local": ""
+          }
         }
       };
       let prefixes = parser.prefixes(namespaces);
@@ -26,9 +28,11 @@ describe("NamespaceParser", () => {
 
     it("returns prefix with colon", () => {
       let namespaces = {
-        "xmlns:atom": {
-          "value": NamespaceParser.ATOM_URI,
-          "local": "atom"
+        "$": {
+          "xmlns:atom": {
+            "value": NamespaceParser.ATOM_URI,
+            "local": "atom"
+          }
         }
       };
       let prefixes = parser.prefixes(namespaces);

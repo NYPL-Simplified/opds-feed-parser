@@ -1,5 +1,7 @@
 ///<reference path="../typings/mocha/mocha.d.ts" />
 ///<reference path="../typings/chai/chai.d.ts" />
+///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
+import Immutable = require("immutable");
 import FeedParser from "../src/feed_parser";
 import AcquisitionFeed from "../src/acquisition_feed";
 import NavigationFeed from "../src/navigation_feed";
@@ -12,7 +14,9 @@ describe("FeedParser", () => {
   let parser: FeedParser;
 
   beforeEach(() => {
-    parser = new FeedParser();
+    let prefixes = Immutable.Map<string, string>();
+    prefixes[NamespaceParser.ATOM_URI] = "atom:";
+    parser = new FeedParser(prefixes);
   });
 
   describe("#parse", () => {

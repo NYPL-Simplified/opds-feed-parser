@@ -1,11 +1,12 @@
 ///<reference path="../typings/core-js/core-js.d.ts"/>
 ///<reference path="../typings/xml2js/xml2js.d.ts"/>
 import OPDSFeed from "./opds_feed";
+import NamespaceParser from "./namespace_parser";
 import FeedParser from "./feed_parser";
 import xml2js = require("xml2js");
 
 let xmlParser = new xml2js.Parser({xmlns: true});
-let feedParser = new FeedParser();
+let namespaceParser = new NamespaceParser();
 
 export default class OPDSParser {
   parse(s: string): Promise<OPDSFeed> {
@@ -15,6 +16,8 @@ export default class OPDSParser {
           reject(err);
         } else {
           if (result.feed) {
+            let prefixes = namespaceParser.prefixes(result.feed);
+            let feedParser = new FeedParser(prefixes);
             let opdsFeed = feedParser.parse(result.feed);
             resolve(opdsFeed);
           } else {

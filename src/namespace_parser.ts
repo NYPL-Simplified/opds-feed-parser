@@ -16,9 +16,9 @@ export default class NamespaceParser {
     NamespaceParser.THR_URI,
     NamespaceParser.OPEN_SEARCH_URI
   ];
-  prefixes(namespaces: any): Immutable.Map<string, string> {
+  prefixes(feed: any): Immutable.Map<string, string> {
     let prefixMap = Immutable.Map<string, string>();
-    let rawNamespaces = Immutable.Map<string, XMLInterface.XMLNamespace>(namespaces);
+    let rawNamespaces = Immutable.Map<string, XMLInterface.XMLNamespace>(feed["$"]);
     NamespaceParser.URIS.forEach((uri) => {
       let namespace = rawNamespaces.find((ns) => {
         return ns.value === uri;
