@@ -5,7 +5,7 @@ import CategoryParser from "./category_parser";
 import NamespaceParser from "./namespace_parser";
 import Xml2jsOutputParser from "./xml2js_output_parser";
 
-export default class EntryParser extends Xml2jsOutputParser {
+export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
   parse(entry: any): OPDSEntry {
     let linkParser = new LinkParser(this.prefixes);
     let atomPrefix = this.prefixes[NamespaceParser.ATOM_URI];

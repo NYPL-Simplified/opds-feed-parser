@@ -6,7 +6,7 @@ import OPDSAcquisitionLink from "./opds_acquisition_link";
 import NamespaceParser from "./namespace_parser";
 import Xml2jsOutputParser from "./xml2js_output_parser";
 
-export default class LinkParser extends Xml2jsOutputParser {
+export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
   parse(link: any): OPDSLink {
     let href = this.parseAttribute(link, "href");
     let rel = this.parseAttribute(link, "rel");
