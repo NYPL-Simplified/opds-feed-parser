@@ -14,7 +14,7 @@ import XMLInterface = require("./xml_interface");
 let namespaceParser = new NamespaceParser();
 
 export default class FeedParser {
-  parse(feed: XMLInterface.XMLFeed): OPDSFeed {
+  parse(feed: any): OPDSFeed {
     let namespaces: Array<XMLInterface.XMLNamespace> = feed["$"];
     let prefixes: Immutable.Map<string, string> = namespaceParser.prefixes(namespaces);
     let atomPrefix = prefixes[NamespaceParser.ATOM_URI];

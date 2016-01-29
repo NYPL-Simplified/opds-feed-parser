@@ -1,75 +1,27 @@
-///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
-import Immutable = require("immutable");
 import OPDSEntry from "./opds_entry";
-import OPDSLink from "./opds_link";
-import Author from "./author";
-import Category from "./category";
 import LinkParser from "./link_parser";
 import AuthorParser from "./author_parser";
 import CategoryParser from "./category_parser";
 import NamespaceParser from "./namespace_parser";
-import XMLInterface = require("./xml_interface");
+import Xml2jsOutputParser from "./xml2js_output_parser";
 
-export default class EntryParser {
-  private prefixes: Immutable.Map<string, string>;
-  constructor(prefixes: Immutable.Map<string, string>) {
-    this.prefixes = prefixes;
-  }
-
-  parse(entry: XMLInterface.XMLEntry): OPDSEntry {
+export default class EntryParser extends Xml2jsOutputParser {
+  parse(entry: any): OPDSEntry {
     let linkParser = new LinkParser(this.prefixes);
     let atomPrefix = this.prefixes[NamespaceParser.ATOM_URI];
     let dcPrefix = this.prefixes[NamespaceParser.DC_URI];
 
-    let id: string;
-    let rawIds = entry[atomPrefix + "id"];
-    if (rawIds && rawIds.length > 0) {
-      id = rawIds[0]["_"];
-    }
+    let id = this.parseSubtagContent(entry, atomPrefix + "id");
+    let updated = this.parseSubtagContent(entry, atomPrefix + "updated");
+    let title = this.parseSubtagContent(entry, atomPrefix + "title");
 
-    let updated: string;
-    let rawUpdated = entry[atomPrefix + "updated"];
-    if (rawUpdated && rawUpdated.length > 0) {
-      updated = rawUpdated[0]["_"];
-    }
+    let authorParser = new AuthorParser(this.prefixes);
+    let authors = this.parseSubtags(entry, atomPrefix + "author", authorParser);
 
-    let title: string;
-    let rawTitle = entry[atomPrefix + "title"];
-    if (rawTitle && rawTitle.length > 0) {
-      title = rawTitle[0]["_"];
-    }
+    let links = this.parseSubtags(entry, atomPrefix + "link", linkParser);
 
-    let authors: Array<Author>;
-    let rawAuthors = entry[atomPrefix + "author"];
-    if (rawAuthors && rawAuthors.length > 0) {
-      let authorParser = new AuthorParser(this.prefixes);
-      authors = rawAuthors.map((author) => {
-        return authorParser.parse(author);
-      });
-    } else {
-      authors = [];
-    }
-
-    let rawLinks = entry[atomPrefix + "link"];
-    let links: Array<OPDSLink>;
-    if (rawLinks && rawLinks.length > 0) {
-      links = rawLinks.map((link) => {
-        return linkParser.parse(link);
-      });
-    } else {
-      links = [];
-    }
-
-    let rawCategories = entry[atomPrefix + "category"];
-    let categories: Array<Category>;
-    if (rawCategories && rawCategories.length > 0) {
-      let categoryParser = new CategoryParser(this.prefixes);
-      categories = rawCategories.map((category) => {
-        return categoryParser.parse(category);
-      });
-    } else {
-      categories = [];
-    }
+    let categoryParser = new CategoryParser(this.prefixes);
+    let categories = this.parseSubtags(entry, atomPrefix + "category", categoryParser);
 
     let rawIdentifiers = entry[dcPrefix + "identifier"];
     let identifiers: Array<string>;
@@ -81,11 +33,8 @@ export default class EntryParser {
       identifiers = [];
     }
 
-    let issued: string;
-    let rawIssued = entry[dcPrefix + "issued"];
-    if (rawIssued && rawIssued.length > 0) {
-      issued = rawIssued[0]["_"];
-    }
+    let issued = this.parseSubtagContent(entry, dcPrefix + "issued");
+
     return new OPDSEntry(id, updated, title, authors, links, categories, identifiers, issued);
   }
 }
