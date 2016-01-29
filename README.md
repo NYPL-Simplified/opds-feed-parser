@@ -13,8 +13,7 @@ var Parser = require("opds-feed-parser").default;
 var request = require("request");
 
 var parser = new Parser();
-request("http://feedbooks.github.io/opds-test-catalog/catalog/acquisition/blocks.xml", (error, re\
-sponse, body) => {
+request("http://feedbooks.github.io/opds-test-catalog/catalog/acquisition/blocks.xml", (error, response, body) => {
     var promise = parser.parse(body);
     promise.then((result) => {
         console.dir(result);
