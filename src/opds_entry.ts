@@ -1,6 +1,7 @@
 import OPDSLink from "./opds_link";
 import Author from "./author";
 import Category from "./category";
+import Summary from "./summary";
 
 export default class OPDSEntry {
   id: string;
@@ -11,6 +12,9 @@ export default class OPDSEntry {
   categories: Array<Category>;
   identifiers: Array<string>;
   issued: string;
+  rights: string;
+  summary: Summary;
+
   constructor(
     id: string,
     updated: string,
@@ -19,7 +23,9 @@ export default class OPDSEntry {
     links: Array<OPDSLink>,
     categories: Array<Category>,
     identifiers: Array<string>,
-    issued: string
+    issued: string,
+    rights: string,
+    summary: Summary
   ) {
 
     this.id = id;
@@ -30,5 +36,7 @@ export default class OPDSEntry {
     this.categories = categories;
     this.identifiers = identifiers;
     this.issued = issued;
+    this.rights = rights;
+    this.summary = summary;
   }
 }

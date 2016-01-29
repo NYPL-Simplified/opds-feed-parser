@@ -113,5 +113,44 @@ describe("EntryParser", () => {
       let parsedEntry = parser.parse(entry);
       expect(parsedEntry.issued).to.equals("2016-01-01");
     });
+
+    it("extracts rights", () => {
+      let entry = {
+        "atom:rights": [{"_": "test rights"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.rights).to.equals("test rights");
+    });
+
+    it("extracts summary from atom:summary", () => {
+      let entry = {
+        "atom:summary": [{"_": "test summary"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.summary.content).to.equals("test summary");
+      expect(parsedEntry.summary.link).to.be.undefined;
+    });
+
+    it("extracts summary content from atom:content", () => {
+      let entry = {
+        "atom:content": [{"_": "test summary"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.summary.content).to.equals("test summary");
+      expect(parsedEntry.summary.link).to.be.undefined;
+    });
+
+    it("extracts summary link from atom:content", () => {
+      let entry = {
+        "atom:content": [{
+          "$": {
+            "src": {"value": "test summary link"}
+          }
+        }]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.summary.link).to.equals("test summary link");
+      expect(parsedEntry.summary.content).to.be.undefined;
+    });
   });
 });
