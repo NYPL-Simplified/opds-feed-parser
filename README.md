@@ -1,4 +1,4 @@
-# opds-parser
+# opds-feed-parser
 Javascript OPDS feed parser
 
 

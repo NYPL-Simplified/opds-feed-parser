@@ -1,11 +1,11 @@
 {
-  "name": "opds-parser",
+  "name": "opds-feed-parser",
   "version": "0.0.1",
-  "description": "OPDS parser",
+  "description": "OPDS feed parser",
   "author": "NYPL",
   "repository": {
     "type": "git",
-    "url": "git@github.com:NYPL-Simplified/opds-parser.git"
+    "url": "git@github.com:NYPL-Simplified/opds-feed-parser.git"
   },
   "main": "lib/opds_parser.js",
   "license": "Apache-2.0",
