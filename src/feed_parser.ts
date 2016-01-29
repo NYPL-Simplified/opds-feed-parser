@@ -1,16 +1,13 @@
 ///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
 import Immutable = require("immutable");
 import OPDSFeed from "./opds_feed";
-import OPDSLink from "./opds_link";
 import OPDSAcquisitionLink from "./opds_acquisition_link";
-import OPDSEntry from "./opds_entry";
 import NavigationFeed from "./navigation_feed";
 import AcquisitionFeed from "./acquisition_feed";
 import LinkParser from "./link_parser";
 import EntryParser from "./entry_parser";
 import NamespaceParser from "./namespace_parser";
 import Xml2jsOutputParser from "./xml2js_output_parser";
-import XMLInterface = require("./xml_interface");
 
 export default class FeedParser extends Xml2jsOutputParser<OPDSFeed> {
   parse(feed: any): OPDSFeed {
