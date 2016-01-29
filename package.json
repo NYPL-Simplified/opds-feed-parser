@@ -7,6 +7,7 @@
     "type": "git",
     "url": "git@github.com:NYPL-Simplified/opds-parser.git"
   },
+  "main": "lib/opds_parser.js",
   "license": "Apache-2.0",
   "scripts": {
     "prepublish": "npm install tsd; tsd install; tsc",
