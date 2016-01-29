@@ -1,4 +1,4 @@
-built/*
+lib/*
 node_modules/*
 typings/*
 src/*.js

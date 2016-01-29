@@ -1,6 +1,6 @@
 {
   "name": "opds-parser",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "OPDS parser",
   "author": "NYPL",
   "repository": {
@@ -9,9 +9,7 @@
   },
   "license": "Apache-2.0",
   "scripts": {
-    "preinstall": "npm install tsd",
-    "postinstall": "tsd install",
-    "prepublish": "tsc",
+    "prepublish": "npm install tsd; tsd install; tsc",
     "test": "tslint -c tslint.json src/*.ts test/*.ts && mocha",
     "pretest": "tsc test/*.ts --module commonjs"
   },
