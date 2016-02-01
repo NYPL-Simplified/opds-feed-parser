@@ -1,4 +1,4 @@
-export default class Author {
+export default class Contributor {
   name: string;
   uri: string;
   constructor(name: string, uri: string) {

@@ -1,6 +1,6 @@
 import OPDSEntry from "./opds_entry";
 import LinkParser from "./link_parser";
-import AuthorParser from "./author_parser";
+import ContributorParser from "./contributor_parser";
 import CategoryParser from "./category_parser";
 import NamespaceParser from "./namespace_parser";
 import Summary from "./summary";
@@ -16,8 +16,9 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
     let updated = this.parseSubtagContent(entry, atomPrefix + "updated");
     let title = this.parseSubtagContent(entry, atomPrefix + "title");
 
-    let authorParser = new AuthorParser(this.prefixes);
-    let authors = this.parseSubtags(entry, atomPrefix + "author", authorParser);
+    let contributorParser = new ContributorParser(this.prefixes);
+    let authors = this.parseSubtags(entry, atomPrefix + "author", contributorParser);
+    let contributors = this.parseSubtags(entry, atomPrefix + "contributor", contributorParser);
 
     let links = this.parseSubtags(entry, atomPrefix + "link", linkParser);
 
@@ -50,6 +51,18 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
     }
     let summary = new Summary(summaryContent, summaryLink);
 
-    return new OPDSEntry(id, updated, title, authors, links, categories, identifiers, issued, rights, summary);
+    return new OPDSEntry(
+       id,
+       updated,
+       title,
+       authors,
+       contributors,
+       links,
+       categories,
+       identifiers,
+       issued,
+       rights,
+       summary
+     );
   }
 }

@@ -152,5 +152,20 @@ describe("EntryParser", () => {
       expect(parsedEntry.summary.link).to.equals("test summary link");
       expect(parsedEntry.summary.content).to.be.undefined;
     });
+
+    it("extracts contributors", () => {
+      let contributors = [{
+        "name": [{"_": "test name"}],
+        "uri": [{"_": "test uri"}]
+      }];
+      let entry = {
+        "atom:contributor": contributors
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.contributors.length).to.equals(1);
+      let parsedContributor = parsedEntry.contributors[0];
+      expect(parsedContributor.name).to.equals("test name");
+      expect(parsedContributor.uri).to.equals("test uri");
+    });
   });
 });

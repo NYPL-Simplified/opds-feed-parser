@@ -2,17 +2,17 @@
 ///<reference path="../typings/chai/chai.d.ts" />
 ///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
 import Immutable = require("immutable");
-import AuthorParser from "../src/author_parser";
+import ContributorParser from "../src/contributor_parser";
 import chai = require("chai");
 let expect = chai.expect;
 
 
-describe("AuthorParser", () => {
-  let parser: AuthorParser;
+describe("ContributorParser", () => {
+  let parser: ContributorParser;
 
   beforeEach(() => {
     let prefixes = Immutable.Map<string, string>();
-    parser = new AuthorParser(prefixes);
+    parser = new ContributorParser(prefixes);
   });
 
   describe("#parse", () => {
