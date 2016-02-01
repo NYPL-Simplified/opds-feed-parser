@@ -167,5 +167,13 @@ describe("EntryParser", () => {
       expect(parsedContributor.name).to.equals("test name");
       expect(parsedContributor.uri).to.equals("test uri");
     });
+
+    it("extracts published", () => {
+      let entry = {
+        "atom:published": [{"_": "2016-01-01"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.published).to.equals("2016-01-01");
+    });
   });
 });

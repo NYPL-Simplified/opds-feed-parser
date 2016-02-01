@@ -14,6 +14,7 @@ export default class OPDSEntry {
   identifiers: Array<string>;
   issued: string;
   rights: string;
+  published: string;
   summary: Summary;
 
   constructor(
@@ -27,6 +28,7 @@ export default class OPDSEntry {
     identifiers: Array<string>,
     issued: string,
     rights: string,
+    published: string,
     summary: Summary
   ) {
 
@@ -40,6 +42,7 @@ export default class OPDSEntry {
     this.identifiers = identifiers;
     this.issued = issued;
     this.rights = rights;
+    this.published = published;
     this.summary = summary;
   }
 }
