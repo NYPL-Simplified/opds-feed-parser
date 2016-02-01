@@ -7,8 +7,8 @@ export default class SearchLink extends OPDSLink {
   itemsPerPage: number;
 
   constructor(args: SearchLinkArgs) {
-    let argsWithRel = Object.assign(args, { rel: SearchLink.REL });
-    super(argsWithRel);
+    args.rel = SearchLink.REL;
+    super(args);
   }
 }
 

@@ -7,8 +7,8 @@ export default class OPDSFacetLink extends OPDSLink {
   count: number;
 
   constructor(args: OPDSFacetLinkArgs) {
-    let argsWithRel = Object.assign(args, { rel: OPDSFacetLink.REL });
-    super(argsWithRel);
+    args.rel = OPDSFacetLink.REL;
+    super(args);
   }
 }
 
