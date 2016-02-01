@@ -1,4 +1,6 @@
 import OPDSEntry from "./opds_entry";
+import PartialOPDSEntry from "./partial_opds_entry";
+import AlternateLink from "./alternate_link";
 import LinkParser from "./link_parser";
 import ContributorParser from "./contributor_parser";
 import CategoryParser from "./category_parser";
@@ -52,7 +54,15 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
     }
     let summary = new Summary(summaryContent, summaryLink);
 
-    return new OPDSEntry(
+    let entryClass = OPDSEntry;
+    let alternateLink = links.find((link) => {
+      return (link instanceof AlternateLink) && (link.type === "application/atom+xml;type=entry;profile=opds-catalog");
+    });
+    if (alternateLink) {
+      entryClass = PartialOPDSEntry;
+    }
+
+    return new entryClass(
        id,
        updated,
        title,

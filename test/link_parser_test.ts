@@ -7,6 +7,7 @@ import NamespaceParser from "../src/namespace_parser";
 import OPDSCatalogRootLink from "../src/opds_catalog_root_link";
 import OPDSFacetLink from "../src/opds_facet_link";
 import SearchLink from "../src/search_link";
+import AlternateLink from "../src/alternate_link";
 import OPDSAcquisitionLink from "../src/opds_acquisition_link";
 import chai = require("chai");
 let expect = chai.expect;
@@ -115,6 +116,19 @@ describe("LinkParser", () => {
       expect(parsedLink instanceof OPDSAcquisitionLink).to.be.true;
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals(OPDSAcquisitionLink.REL);
+    });
+
+    it("extracts alternate link", () => {
+      let link = {
+        "$": {
+          "href": {"value": "test href"},
+          "rel": {"value": AlternateLink.REL}
+        }
+      };
+      let parsedLink = parser.parse(link);
+      expect(parsedLink instanceof AlternateLink).to.be.true;
+      expect(parsedLink.href).to.equals("test href");
+      expect(parsedLink.rel).to.equals(AlternateLink.REL);
     });
   });
 });

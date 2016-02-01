@@ -4,6 +4,8 @@
 import Immutable = require("immutable");
 import EntryParser from "../src/entry_parser";
 import NamespaceParser from "../src/namespace_parser";
+import AlternateLink from "../src/alternate_link";
+import PartialOPDSEntry from "../src/partial_opds_entry";
 import chai = require("chai");
 let expect = chai.expect;
 
@@ -174,6 +176,22 @@ describe("EntryParser", () => {
       };
       let parsedEntry = parser.parse(entry);
       expect(parsedEntry.published).to.equals("2016-01-01");
+    });
+
+    it("extracts partial entry", () => {
+      let links = [{
+        "$": {
+          "href": {"value": "test href"},
+          "rel":  {"value": AlternateLink.REL},
+          "type": {"value": "application/atom+xml;type=entry;profile=opds-catalog"}
+        }
+      }];
+      let entry = {
+        "atom:link": links
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry instanceof PartialOPDSEntry).to.be.true;
+      expect(parsedEntry.links.length).to.equals(1);
     });
   });
 });

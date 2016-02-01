@@ -3,6 +3,7 @@ import OPDSCatalogRootLink from "./opds_catalog_root_link";
 import OPDSFacetLink from "./opds_facet_link";
 import SearchLink from "./search_link";
 import OPDSAcquisitionLink from "./opds_acquisition_link";
+import AlternateLink from "./alternate_link";
 import NamespaceParser from "./namespace_parser";
 import Xml2jsOutputParser from "./xml2js_output_parser";
 
@@ -35,6 +36,8 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
       return new SearchLink(href, type, title, totalResults, startIndex, itemsPerPage);
     } else if (rel === OPDSAcquisitionLink.REL) {
       return new OPDSAcquisitionLink(href, type, title);
+    } else if (rel === AlternateLink.REL) {
+      return new AlternateLink(href, type, title);
     } else {
       return new OPDSLink(href, rel, type, title);
     }
