@@ -20,6 +20,20 @@ request("http://feedbooks.github.io/opds-test-catalog/catalog/acquisition/blocks
     });
 ```
 
+## Setup
+Requires Node 4.1 or higher.
+
+On Mac:
+```
+brew install node
+```
+
+On Ubuntu:
+```
+curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+sudo apt-get install nodejs
+```
+
 
 ## License
 
