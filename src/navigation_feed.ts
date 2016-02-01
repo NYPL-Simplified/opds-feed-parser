@@ -3,7 +3,4 @@ import OPDSEntry from "./opds_entry";
 import OPDSLink from "./opds_link";
 
 export default class NavigationFeed extends OPDSFeed {
-  constructor(title: string, entries: Array<OPDSEntry>, links: Array<OPDSLink>) {
-    super(title, entries, links);
-  }
 }

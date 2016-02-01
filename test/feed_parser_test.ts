@@ -65,6 +65,23 @@ describe("FeedParser", () => {
       expect(parsedLink.rel).to.equals("test rel");
     });
 
+    it("extracts id", () => {
+      let id = {
+        "_": "test id"
+      };
+      let feed = {
+        "$": {
+          "xmlns:atom": {
+            "value": NamespaceParser.ATOM_URI,
+            "local": "atom"
+          }
+        },
+        "atom:id": [id]
+      };
+      let parsedFeed = parser.parse(feed);
+      expect(parsedFeed.id).to.equals("test id");
+    });
+
     it("extracts title", () => {
       let title = {
         "_": "test title"
@@ -80,6 +97,23 @@ describe("FeedParser", () => {
       };
       let parsedFeed = parser.parse(feed);
       expect(parsedFeed.title).to.equals("test title");
+    });
+
+    it("extracts updated date", () => {
+      let updated = {
+        "_": "2016-02-01T18:30:59Z"
+      };
+      let feed = {
+        "$": {
+          "xmlns:atom": {
+            "value": NamespaceParser.ATOM_URI,
+            "local": "atom"
+          }
+        },
+        "atom:updated": [updated]
+      };
+      let parsedFeed = parser.parse(feed);
+      expect(parsedFeed.updated).to.equals(updated["_"]);
     });
 
     it("recognizes navigation feed", () => {

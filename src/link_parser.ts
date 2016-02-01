@@ -15,7 +15,7 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
     let title = this.parseAttribute(link, "title");
 
     if (rel === OPDSCatalogRootLink.REL) {
-       return new OPDSCatalogRootLink(href, type, title);
+       return new OPDSCatalogRootLink({ href, type, title });
     } else if (rel === OPDSFacetLink.REL) {
       let opdsPrefix = this.prefixes[NamespaceParser.OPDS_URI];
 
@@ -25,7 +25,7 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
       let thrPrefix = this.prefixes[NamespaceParser.THR_URI];
       let count = parseInt(this.parseAttribute(link, thrPrefix + "count"), 10);
 
-      return new OPDSFacetLink(href, type, title, facetGroup, activeFacet, count);
+      return new OPDSFacetLink({ href, type, title, facetGroup, activeFacet, count });
     } else if (rel === SearchLink.REL) {
       let openSearchPrefix = this.prefixes[NamespaceParser.OPEN_SEARCH_URI];
 
@@ -33,13 +33,13 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
       let startIndex = parseInt(this.parseAttribute(link, openSearchPrefix + "startIndex"), 10);
       let itemsPerPage = parseInt(this.parseAttribute(link, openSearchPrefix + "itemsPerPage"), 10);
 
-      return new SearchLink(href, type, title, totalResults, startIndex, itemsPerPage);
+      return new SearchLink({ href, type, title, totalResults, startIndex, itemsPerPage });
     } else if (rel === OPDSAcquisitionLink.REL) {
-      return new OPDSAcquisitionLink(href, type, title);
+      return new OPDSAcquisitionLink({ href, type, title });
     } else if (rel === AlternateLink.REL) {
-      return new AlternateLink(href, type, title);
+      return new AlternateLink({ href, type, title });
     } else {
-      return new OPDSLink(href, rel, type, title);
+      return new OPDSLink({ href, rel, type, title });
     }
   }
 }

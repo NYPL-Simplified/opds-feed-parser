@@ -52,7 +52,7 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
         summaryLink = this.parseAttribute(subtag[0], "src");
       }
     }
-    let summary = new Summary(summaryContent, summaryLink);
+    let summary = new Summary({ content: summaryContent, link: summaryLink });
 
     let entryClass = OPDSEntry;
     let alternateLink = links.find((link) => {
@@ -62,7 +62,7 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
       entryClass = PartialOPDSEntry;
     }
 
-    return new entryClass(
+    return new entryClass({
        id,
        updated,
        title,
@@ -75,6 +75,6 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
        rights,
        published,
        summary
-     );
+    });
   }
 }

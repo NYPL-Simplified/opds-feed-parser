@@ -16,9 +16,12 @@ export default class FeedParser extends Xml2jsOutputParser<OPDSFeed> {
     let linkParser = new LinkParser(this.prefixes);
     let entryParser = new EntryParser(this.prefixes);
 
+    let id = this.parseSubtagContent(feed, atomPrefix + "id");
     let title = this.parseSubtagContent(feed, atomPrefix + "title");
+    let updated = this.parseSubtagContent(feed, atomPrefix + "updated");
     let links = this.parseSubtags(feed, atomPrefix + "link", linkParser);
     let entries = this.parseSubtags(feed, atomPrefix + "entry", entryParser);
+    let args = { id, title, updated, entries, links };
 
     let allEntriesHaveAcquisitionLinks: boolean = entries.every((entry) => {
       return !!entry.links.find((link) => {
@@ -27,9 +30,9 @@ export default class FeedParser extends Xml2jsOutputParser<OPDSFeed> {
 
     });
     if (allEntriesHaveAcquisitionLinks) {
-      return new AcquisitionFeed(title, entries, links);
+      return new AcquisitionFeed(args);
     } else {
-      return new NavigationFeed(title, entries, links);
+      return new NavigationFeed(args);
     }
   }
 }

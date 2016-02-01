@@ -3,10 +3,15 @@ export default class OPDSLink {
   rel: string;
   type: string;
   title: string;
-  constructor(href: string, rel: string, type: string, title: string) {
-    this.href = href;
-    this.rel = rel;
-    this.type = type;
-    this.title = title;
+
+  constructor(args: OPDSLinkArgs) {
+    Object.assign(this, args);
   }
+}
+
+export interface OPDSLinkArgs {
+  href: string;
+  type: string;
+  title: string;
+  rel?: string;
 }

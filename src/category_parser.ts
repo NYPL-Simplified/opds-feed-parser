@@ -6,7 +6,6 @@ export default class CategoryParser extends Xml2jsOutputParser<Category> {
     let term = this.parseAttribute(category, "term");
     let scheme = this.parseAttribute(category, "scheme");
     let label = this.parseAttribute(category, "label");
-
-    return new Category(term, scheme, label);
+    return new Category({ term, scheme, label });
   }
 }
