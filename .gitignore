@@ -1,0 +1,6 @@
+lib/*
+node_modules/*
+typings/*
+src/*.js
+test/*.js
+*~
