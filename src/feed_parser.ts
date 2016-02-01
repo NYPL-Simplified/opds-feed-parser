@@ -1,6 +1,6 @@
 ///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
 import Immutable = require("immutable");
-import OPDSFeed, { OPDSFeedArgs } from "./opds_feed";
+import OPDSFeed from "./opds_feed";
 import OPDSAcquisitionLink from "./opds_acquisition_link";
 import NavigationFeed from "./navigation_feed";
 import AcquisitionFeed from "./acquisition_feed";
@@ -21,7 +21,7 @@ export default class FeedParser extends Xml2jsOutputParser<OPDSFeed> {
     let updated = this.parseSubtagContent(feed, atomPrefix + "updated");
     let links = this.parseSubtags(feed, atomPrefix + "link", linkParser);
     let entries = this.parseSubtags(feed, atomPrefix + "entry", entryParser);
-    let args = <OPDSFeedArgs>{ id, title, updated, entries, links };
+    let args = { id, title, updated, entries, links };
 
     let allEntriesHaveAcquisitionLinks: boolean = entries.every((entry) => {
       return !!entry.links.find((link) => {

@@ -1,7 +1,7 @@
-import OPDSLink, { OPDSLinkArgs } from "./opds_link";
+import OPDSLink from "./opds_link";
 import OPDSCatalogRootLink from "./opds_catalog_root_link";
-import OPDSFacetLink, { OPDSFacetLinkArgs } from "./opds_facet_link";
-import SearchLink, { SearchLinkArgs } from "./search_link";
+import OPDSFacetLink from "./opds_facet_link";
+import SearchLink from "./search_link";
 import OPDSAcquisitionLink from "./opds_acquisition_link";
 import AlternateLink from "./alternate_link";
 import NamespaceParser from "./namespace_parser";

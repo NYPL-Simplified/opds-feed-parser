@@ -1,11 +1,11 @@
-import OPDSEntry, { OPDSEntryArgs } from "./opds_entry";
+import OPDSEntry from "./opds_entry";
 import PartialOPDSEntry from "./partial_opds_entry";
 import AlternateLink from "./alternate_link";
 import LinkParser from "./link_parser";
 import ContributorParser from "./contributor_parser";
 import CategoryParser from "./category_parser";
 import NamespaceParser from "./namespace_parser";
-import Summary, { SummaryArgs } from "./summary";
+import Summary from "./summary";
 import Xml2jsOutputParser from "./xml2js_output_parser";
 
 export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
@@ -52,7 +52,7 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
         summaryLink = this.parseAttribute(subtag[0], "src");
       }
     }
-    let summary = new Summary(<SummaryArgs>{ content: summaryContent, link: summaryLink });
+    let summary = new Summary({ content: summaryContent, link: summaryLink });
 
     let entryClass = OPDSEntry;
     let alternateLink = links.find((link) => {
@@ -62,7 +62,7 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
       entryClass = PartialOPDSEntry;
     }
 
-    return new entryClass(<OPDSEntryArgs>{
+    return new entryClass({
        id,
        updated,
        title,
