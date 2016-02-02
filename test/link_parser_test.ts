@@ -9,6 +9,7 @@ import OPDSFacetLink from "../src/opds_facet_link";
 import SearchLink from "../src/search_link";
 import AlternateLink from "../src/alternate_link";
 import OPDSAcquisitionLink from "../src/opds_acquisition_link";
+import OPDSArtworkLink from "../src/opds_artwork_link";
 import chai = require("chai");
 let expect = chai.expect;
 
@@ -105,17 +106,34 @@ describe("LinkParser", () => {
       expect(parsedLink.startIndex).to.equals(45);
     });
 
-    it("extracts acquisition link", () => {
-      let link = {
-        "$": {
-          "href": {"value": "test href"},
-          "rel": {"value": OPDSAcquisitionLink.REL}
-        }
-      };
-      let parsedLink = parser.parse(link);
-      expect(parsedLink instanceof OPDSAcquisitionLink).to.be.true;
-      expect(parsedLink.href).to.equals("test href");
-      expect(parsedLink.rel).to.equals(OPDSAcquisitionLink.REL);
+    it("extracts acquisition links", () => {
+      OPDSAcquisitionLink.RELS.forEach(rel => {
+        let link = {
+          "$": {
+            "href": {"value": "test href"},
+            "rel": {"value": rel}
+          }
+        };
+        let parsedLink = parser.parse(link);
+        expect(parsedLink instanceof OPDSAcquisitionLink).to.be.true;
+        expect(parsedLink.href).to.equals("test href");
+        expect(parsedLink.rel).to.equals(rel);
+      });
+    });
+
+    it("extracts artwork links", () => {
+      OPDSArtworkLink.RELS.forEach(rel => {
+        let link = {
+          "$": {
+            "href": {"value": "test href"},
+            "rel": {"value": rel}
+          }
+        };
+        let parsedLink = parser.parse(link);
+        expect(parsedLink instanceof OPDSArtworkLink).to.be.true;
+        expect(parsedLink.href).to.equals("test href");
+        expect(parsedLink.rel).to.equals(rel);
+      });
     });
 
     it("extracts alternate link", () => {

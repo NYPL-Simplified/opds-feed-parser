@@ -3,6 +3,7 @@ import OPDSCatalogRootLink from "./opds_catalog_root_link";
 import OPDSFacetLink from "./opds_facet_link";
 import SearchLink from "./search_link";
 import OPDSAcquisitionLink from "./opds_acquisition_link";
+import OPDSArtworkLink from "./opds_artwork_link";
 import AlternateLink from "./alternate_link";
 import NamespaceParser from "./namespace_parser";
 import Xml2jsOutputParser from "./xml2js_output_parser";
@@ -34,12 +35,22 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
       let itemsPerPage = parseInt(this.parseAttribute(link, openSearchPrefix + "itemsPerPage"), 10);
 
       return new SearchLink({ href, type, title, totalResults, startIndex, itemsPerPage });
-    } else if (rel === OPDSAcquisitionLink.REL) {
-      return new OPDSAcquisitionLink({ href, type, title });
+    } else if (this.isAcquisitionLinkRel(rel)) {
+      return new OPDSAcquisitionLink({ href, rel, type, title });
     } else if (rel === AlternateLink.REL) {
       return new AlternateLink({ href, type, title });
+    } else if (this.isArtworkLinkRel(rel)) {
+      return new OPDSArtworkLink({ href, rel, type, title });
     } else {
       return new OPDSLink({ href, rel, type, title });
     }
+  }
+
+  private isAcquisitionLinkRel(rel) {
+    return OPDSAcquisitionLink.RELS.includes(rel);
+  }
+
+  private isArtworkLinkRel(rel) {
+    return OPDSArtworkLink.RELS.includes(rel);
   }
 }
