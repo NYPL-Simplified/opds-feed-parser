@@ -2,6 +2,7 @@
 import OPDSLink, { OPDSLinkArgs } from "./opds_link";
 import * as Immutable from "immutable";
 import OPDSPrice from "./opds_price";
+import OPDSIndirectAcquisition from "./opds_indirect_acquisition";
 
 export default class OPDSAcquisitionLink extends OPDSLink {
   static BASE_REL = "http://opds-spec.org/acquisition";
@@ -21,6 +22,7 @@ export default class OPDSAcquisitionLink extends OPDSLink {
   ]);
 
   prices: OPDSPrice[];
+  indirectAcquisitions: OPDSIndirectAcquisition[];
 
   constructor(args: OPDSAcquisitionLinkArgs) {
     super(args);
@@ -29,4 +31,5 @@ export default class OPDSAcquisitionLink extends OPDSLink {
 
 export interface OPDSAcquisitionLinkArgs extends OPDSLinkArgs {
   prices: OPDSPrice[];
+  indirectAcquisitions: OPDSIndirectAcquisition[];
 }

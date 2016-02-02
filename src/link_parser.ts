@@ -3,11 +3,12 @@ import OPDSCatalogRootLink from "./opds_catalog_root_link";
 import OPDSFacetLink from "./opds_facet_link";
 import SearchLink from "./search_link";
 import OPDSAcquisitionLink from "./opds_acquisition_link";
+import PriceParser from "./price_parser";
+import IndirectAcquisitionParser from "./indirect_acquisition_parser";
 import OPDSArtworkLink from "./opds_artwork_link";
 import AlternateLink from "./alternate_link";
 import NamespaceParser from "./namespace_parser";
 import Xml2jsOutputParser from "./xml2js_output_parser";
-import PriceParser from "./price_parser";
 
 export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
   parse(link: any): OPDSLink {
@@ -40,8 +41,10 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
       let opdsPrefix = this.prefixes[NamespaceParser.OPDS_URI];
       let priceParser = new PriceParser(this.prefixes);
       let prices = this.parseSubtags(link, opdsPrefix + "price", priceParser);
+      let indirectAcquisitionParser = new IndirectAcquisitionParser(this.prefixes);
+      let indirectAcquisitions = this.parseSubtags(link, opdsPrefix + "indirectAcquisition", indirectAcquisitionParser);
 
-      return new OPDSAcquisitionLink({ href, rel, type, title, prices });
+      return new OPDSAcquisitionLink({ href, rel, type, title, prices, indirectAcquisitions });
     } else if (rel === AlternateLink.REL) {
       return new AlternateLink({ href, type, title });
     } else if (this.isArtworkLinkRel(rel)) {

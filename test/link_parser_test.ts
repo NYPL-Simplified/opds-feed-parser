@@ -115,7 +115,7 @@ describe("LinkParser", () => {
           }
         };
         let parsedLink = parser.parse(link);
-        expect(parsedLink instanceof OPDSAcquisitionLink).to.be.true;
+        expect(parsedLink).to.be.an.instanceof(OPDSAcquisitionLink);
         expect(parsedLink.href).to.equals("test href");
         expect(parsedLink.rel).to.equals(rel);
       });
@@ -139,11 +139,57 @@ describe("LinkParser", () => {
         ]
       };
       let parsedLink = parser.parse(link);
-      expect(parsedLink instanceof OPDSAcquisitionLink).to.be.true;
+      expect(parsedLink).to.be.an.instanceof(OPDSAcquisitionLink);
       let castParsedLink = <OPDSAcquisitionLink>parsedLink;
       expect(castParsedLink.prices.length).to.equals(1);
       expect(castParsedLink.prices[0].value).to.equals(value);
       expect(castParsedLink.prices[0].currencyCode).to.equals(currencyCode);
+    });
+
+    it("extracts nested indirect acquisitions for acquisition links", () => {
+      let type1 = "vnd.adobe/adept+xml";
+      let type2 = "application/epub+zip";
+      let type3 = "application/zip";
+      let type4 = "application/pdf";
+      let link = {
+        "$": {
+          "href": {"value": "test href"},
+          "rel": {"value": OPDSAcquisitionLink.BUY_REL}
+        },
+        "opds:indirectAcquisition": [
+          {
+            "$": {
+              "type": { "value": type1 }
+            },
+            "opds:indirectAcquisition": [
+              {
+                "$": {
+                  "type": { "value": type2 }
+                }
+              }
+            ]
+          },
+          {
+            "$": {
+              "type": { "value": type3 }
+            },
+            "opds:indirectAcquisition": [
+              {
+                "$": {
+                  "type": { "value": type4 }
+                }
+              }
+            ]
+          }
+        ]
+      };
+      let parsedLink = parser.parse(link);
+      expect(parsedLink).to.be.an.instanceof(OPDSAcquisitionLink);
+      let castParsedLink = <OPDSAcquisitionLink>parsedLink;
+      expect(castParsedLink.indirectAcquisitions[0].type).to.equals(type1);
+      expect(castParsedLink.indirectAcquisitions[0].indirectAcquisitions[0].type).to.equals(type2);
+      expect(castParsedLink.indirectAcquisitions[1].type).to.equals(type3);
+      expect(castParsedLink.indirectAcquisitions[1].indirectAcquisitions[0].type).to.equals(type4);
     });
 
     it("extracts artwork links", () => {
@@ -155,7 +201,7 @@ describe("LinkParser", () => {
           }
         };
         let parsedLink = parser.parse(link);
-        expect(parsedLink instanceof OPDSArtworkLink).to.be.true;
+        expect(parsedLink).to.be.an.instanceof(OPDSArtworkLink);
         expect(parsedLink.href).to.equals("test href");
         expect(parsedLink.rel).to.equals(rel);
       });
