@@ -142,8 +142,6 @@ describe("LinkParser", () => {
       expect(parsedLink).to.be.an.instanceof(OPDSAcquisitionLink);
       let castParsedLink = <OPDSAcquisitionLink>parsedLink;
       expect(castParsedLink.prices.length).to.equals(1);
-      expect(castParsedLink.prices[0].value).to.equals(value);
-      expect(castParsedLink.prices[0].currencyCode).to.equals(currencyCode);
     });
 
     it("extracts nested indirect acquisitions for acquisition links", () => {
