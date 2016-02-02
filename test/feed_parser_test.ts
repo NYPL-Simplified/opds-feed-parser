@@ -144,7 +144,7 @@ describe("FeedParser", () => {
       let links = [{
         "$": {
           "href": {"value": "test href"},
-          "rel":  {"value": OPDSAcquisitionLink.REL}
+          "rel":  {"value": OPDSAcquisitionLink.GENERIC_REL}
         }
       }];
       let entry = {
