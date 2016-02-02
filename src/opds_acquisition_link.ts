@@ -1,6 +1,7 @@
 ///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
 import OPDSLink, { OPDSLinkArgs } from "./opds_link";
 import * as Immutable from "immutable";
+import OPDSPrice from "./opds_price";
 
 export default class OPDSAcquisitionLink extends OPDSLink {
   static BASE_REL = "http://opds-spec.org/acquisition";
@@ -18,4 +19,14 @@ export default class OPDSAcquisitionLink extends OPDSLink {
     OPDSAcquisitionLink.SAMPLE_REL,
     OPDSAcquisitionLink.SUBSCRIBE_REL
   ]);
+
+  prices: OPDSPrice[];
+
+  constructor(args: OPDSAcquisitionLinkArgs) {
+    super(args);
+  }
+}
+
+export interface OPDSAcquisitionLinkArgs extends OPDSLinkArgs {
+  prices: OPDSPrice[];
 }

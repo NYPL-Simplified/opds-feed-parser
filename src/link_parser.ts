@@ -7,6 +7,7 @@ import OPDSArtworkLink from "./opds_artwork_link";
 import AlternateLink from "./alternate_link";
 import NamespaceParser from "./namespace_parser";
 import Xml2jsOutputParser from "./xml2js_output_parser";
+import PriceParser from "./price_parser";
 
 export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
   parse(link: any): OPDSLink {
@@ -36,7 +37,11 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
 
       return new SearchLink({ href, type, title, totalResults, startIndex, itemsPerPage });
     } else if (this.isAcquisitionLinkRel(rel)) {
-      return new OPDSAcquisitionLink({ href, rel, type, title });
+      let opdsPrefix = this.prefixes[NamespaceParser.OPDS_URI];
+      let priceParser = new PriceParser(this.prefixes);
+      let prices = this.parseSubtags(link, opdsPrefix + "price", priceParser);
+
+      return new OPDSAcquisitionLink({ href, rel, type, title, prices });
     } else if (rel === AlternateLink.REL) {
       return new AlternateLink({ href, type, title });
     } else if (this.isArtworkLinkRel(rel)) {

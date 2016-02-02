@@ -121,6 +121,31 @@ describe("LinkParser", () => {
       });
     });
 
+    it("extracts prices for acquisition links", () => {
+      let value =  "1000.00";
+      let currencyCode = "USD";
+      let link = {
+        "$": {
+          "href": {"value": "test href"},
+          "rel": {"value": OPDSAcquisitionLink.BUY_REL}
+        },
+        "opds:price": [
+          {
+            "$": {
+              "currencyCode": { "value": currencyCode }
+            },
+            "_": value
+          }
+        ]
+      };
+      let parsedLink = parser.parse(link);
+      expect(parsedLink instanceof OPDSAcquisitionLink).to.be.true;
+      let castParsedLink = <OPDSAcquisitionLink>parsedLink;
+      expect(castParsedLink.prices.length).to.equals(1);
+      expect(castParsedLink.prices[0].value).to.equals(value);
+      expect(castParsedLink.prices[0].currencyCode).to.equals(currencyCode);
+    });
+
     it("extracts artwork links", () => {
       OPDSArtworkLink.RELS.forEach(rel => {
         let link = {
