@@ -2,7 +2,7 @@ import OPDSIndirectAcquisition from "./opds_indirect_acquisition";
 import Xml2jsOutputParser from "./xml2js_output_parser";
 import NamespaceParser from "./namespace_parser";
 
-export default class IndirectAcquisitionParcer extends Xml2jsOutputParser<OPDSIndirectAcquisition> {
+export default class IndirectAcquisitionParser extends Xml2jsOutputParser<OPDSIndirectAcquisition> {
   parse(element: any): OPDSIndirectAcquisition {
     let parsed = <OPDSIndirectAcquisition>{ type: this.parseAttribute(element, "type") };
 
