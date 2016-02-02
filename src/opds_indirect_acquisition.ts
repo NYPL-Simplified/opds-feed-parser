@@ -1,6 +1,6 @@
 interface OPDSIndirectAcquisition {
   type: string;
-  indirectAcquisitions: OPDSIndirectAcquisition[];
+  indirectAcquisitions?: OPDSIndirectAcquisition[];
 }
 
 export default OPDSIndirectAcquisition;

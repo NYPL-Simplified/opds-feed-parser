@@ -4,7 +4,7 @@ import NamespaceParser from "./namespace_parser";
 
 export default class IndirectAcquisitionParser extends Xml2jsOutputParser<OPDSIndirectAcquisition> {
   parse(element: any): OPDSIndirectAcquisition {
-    let parsed = <OPDSIndirectAcquisition>{ type: this.parseAttribute(element, "type") };
+    let parsed: OPDSIndirectAcquisition = { type: this.parseAttribute(element, "type") };
 
     let opdsPrefix = this.prefixes[NamespaceParser.OPDS_URI];
     let tagName = opdsPrefix + "indirectAcquisition";
