@@ -117,7 +117,7 @@ describe("FeedParser", () => {
       expect(parsedFeed.updated).to.equals(updated["_"]);
     });
 
-    it("extracts fh:complete if pesent", () => {
+    it("extracts fh:complete if present", () => {
       let complete = {};
       let feed = {
         "$": {
@@ -142,7 +142,7 @@ describe("FeedParser", () => {
         }
       };
       let parsedFeed = parser.parse(feed);
-      expect(parsedFeed.complete).not.to.be.true;
+      expect(parsedFeed.complete).to.be.false;
     });
 
     it("recognizes navigation feed", () => {
