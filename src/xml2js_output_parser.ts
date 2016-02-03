@@ -1,10 +1,9 @@
-///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
-import Immutable = require("immutable");
 import XMLInterface = require("./xml_interface");
+import PrefixMap from "./prefix_map";
 
 export default class Xml2jsOutputParser<T> {
-  prefixes: Immutable.Map<string, string>;
-  constructor(prefixes: Immutable.Map<string, string>) {
+  prefixes: PrefixMap;
+  constructor(prefixes: PrefixMap) {
     this.prefixes = prefixes;
   }
 

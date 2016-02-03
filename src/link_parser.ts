@@ -63,10 +63,10 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
   }
 
   private isAcquisitionLinkRel(rel) {
-    return OPDSAcquisitionLink.RELS.includes(rel);
+    return OPDSAcquisitionLink.RELS.indexOf(rel) !== -1;
   }
 
   private isArtworkLinkRel(rel) {
-    return OPDSArtworkLink.RELS.includes(rel);
+    return OPDSArtworkLink.RELS.indexOf(rel) !== -1;
   }
 }
