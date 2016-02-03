@@ -1,4 +1,3 @@
-///<reference path="../typings/core-js/core-js.d.ts"/>
 ///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
 import Immutable = require("immutable");
 import XMLInterface = require("./xml_interface");
