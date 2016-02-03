@@ -1,7 +1,6 @@
 ///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
 ///<reference path="../typings/main/ambient/chai/chai.d.ts" />
-///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
-import Immutable = require("immutable");
+import PrefixMap from "../src/prefix_map";
 import LinkParser from "../src/link_parser";
 import NamespaceParser from "../src/namespace_parser";
 import OPDSCatalogRootLink from "../src/opds_catalog_root_link";
@@ -19,7 +18,7 @@ describe("LinkParser", () => {
   let parser: LinkParser;
 
   beforeEach(() => {
-    let prefixes = Immutable.Map<string, string>();
+    let prefixes: PrefixMap = {};
     prefixes[NamespaceParser.OPDS_URI] = "opds:";
     prefixes[NamespaceParser.THR_URI] = "thr:";
     prefixes[NamespaceParser.OPEN_SEARCH_URI] = "opensearch:";

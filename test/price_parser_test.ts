@@ -1,7 +1,6 @@
 ///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
 ///<reference path="../typings/main/ambient/chai/chai.d.ts" />
-///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
-import Immutable = require("immutable");
+import PrefixMap from "../src/prefix_map";
 import OPDSPrice from "../src/opds_price";
 import PriceParser from "../src/price_parser";
 import chai = require("chai");
@@ -11,7 +10,7 @@ describe("PriceParser", () => {
   let parser: PriceParser;
 
   beforeEach(() => {
-    let prefixes = Immutable.Map<string, string>();
+    let prefixes: PrefixMap = {};
     parser = new PriceParser(prefixes);
   });
 

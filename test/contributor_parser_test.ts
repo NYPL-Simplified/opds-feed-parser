@@ -1,7 +1,6 @@
 ///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
 ///<reference path="../typings/main/ambient/chai/chai.d.ts" />
-///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
-import Immutable = require("immutable");
+import PrefixMap from "../src/prefix_map";
 import ContributorParser from "../src/contributor_parser";
 import chai = require("chai");
 let expect = chai.expect;
@@ -11,7 +10,7 @@ describe("ContributorParser", () => {
   let parser: ContributorParser;
 
   beforeEach(() => {
-    let prefixes = Immutable.Map<string, string>();
+    let prefixes: PrefixMap = {};
     parser = new ContributorParser(prefixes);
   });
 

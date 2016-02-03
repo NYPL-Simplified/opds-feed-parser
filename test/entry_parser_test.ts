@@ -1,7 +1,6 @@
 ///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
 ///<reference path="../typings/main/ambient/chai/chai.d.ts" />
-///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
-import Immutable = require("immutable");
+import PrefixMap from "../src/prefix_map";
 import EntryParser from "../src/entry_parser";
 import NamespaceParser from "../src/namespace_parser";
 import AlternateLink from "../src/alternate_link";
@@ -15,7 +14,7 @@ describe("EntryParser", () => {
   let parser: EntryParser;
 
   beforeEach(() => {
-    let prefixes = Immutable.Map<string, string>();
+    let prefixes: PrefixMap = {};
     prefixes[NamespaceParser.ATOM_URI] = "atom:";
     prefixes[NamespaceParser.DC_URI] = "dc:";
     parser = new EntryParser(prefixes);

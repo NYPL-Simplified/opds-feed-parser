@@ -1,5 +1,3 @@
-///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
-import Immutable = require("immutable");
 import OPDSFeed from "./opds_feed";
 import OPDSAcquisitionLink from "./opds_acquisition_link";
 import NavigationFeed from "./navigation_feed";

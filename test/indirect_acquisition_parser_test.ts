@@ -1,7 +1,6 @@
 ///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
 ///<reference path="../typings/main/ambient/chai/chai.d.ts" />
-///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
-import Immutable = require("immutable");
+import PrefixMap from "../src/prefix_map";
 import OPDSIndirectAcquisition from "../src/opds_indirect_acquisition";
 import IndirectAcquisitionParser from "../src/indirect_acquisition_parser";
 import NamespaceParser from "../src/namespace_parser";
@@ -12,7 +11,7 @@ describe("IndirectAcquisitionParser", () => {
   let parser: IndirectAcquisitionParser;
 
   beforeEach(() => {
-    let prefixes = Immutable.Map<string, string>();
+    let prefixes: PrefixMap = {};
     prefixes[NamespaceParser.OPDS_URI] = "opds:";
     parser = new IndirectAcquisitionParser(prefixes);
   });

@@ -1,5 +1,4 @@
-///<reference path='../node_modules/immutable/dist/immutable.d.ts'/>
-import Immutable = require("immutable");
+import PrefixMap from "./prefix_map";
 import XMLInterface = require("./xml_interface");
 
 export default class NamespaceParser {
@@ -17,9 +16,9 @@ export default class NamespaceParser {
     NamespaceParser.OPEN_SEARCH_URI,
     NamespaceParser.FH_URI
   ];
-  prefixes(feed: any): Immutable.Map<string, string> {
-    let prefixMap = Immutable.Map<string, string>();
-    let rawNamespaces = Immutable.Map<string, XMLInterface.XMLNamespace>(feed["$"]);
+  prefixes(feed: any): PrefixMap {
+    let prefixMap: PrefixMap = {};
+    let rawNamespaces = Object.keys(feed["$"] || {}).map((k) => feed["$"][k]);
     NamespaceParser.URIS.forEach((uri) => {
       let namespace = rawNamespaces.find((ns) => {
         return ns.value === uri;
