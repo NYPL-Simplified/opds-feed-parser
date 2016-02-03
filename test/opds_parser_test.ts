@@ -1,5 +1,5 @@
-///<reference path="../typings/mocha/mocha.d.ts" />
-///<reference path="../typings/chai/chai.d.ts" />
+///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
+///<reference path="../typings/main/ambient/chai/chai.d.ts" />
 import OPDSFeed from "../src/opds_feed";
 import NavigationFeed from "../src/navigation_feed";
 import AcquisitionFeed from "../src/acquisition_feed";
