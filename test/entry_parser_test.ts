@@ -210,5 +210,19 @@ describe("EntryParser", () => {
       expect(parsedEntry).to.be.an.instanceof(OPDSEntry);
       expect(parsedEntry).not.to.be.an.instanceof(PartialOPDSEntry);
     });
+
+    it("keeps unparsed data", () => {
+      let links = [{
+        "$": {
+          "href": {"value": "test href"},
+          "rel":  {"value": AlternateLink.REL}
+        }
+      }];
+      let entry = {
+        "atom:link": links
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.unparsed).to.eql(entry);
+    });
   });
 });

@@ -8,6 +8,7 @@ export default class OPDSFeed {
   entries: Array<OPDSEntry>;
   links: Array<OPDSLink>;
   complete: boolean;
+  unparsed: any;
 
   constructor(args: OPDSFeedArgs) {
     Object.assign(this, args);

@@ -16,6 +16,7 @@ export default class OPDSEntry {
   rights: string;
   published: string;
   summary: Summary;
+  unparsed: any;
 
   constructor(args: OPDSEntryArgs) {
     Object.assign(this, args);
