@@ -16,6 +16,7 @@ describe("FeedParser", () => {
   beforeEach(() => {
     let prefixes = Immutable.Map<string, string>();
     prefixes[NamespaceParser.ATOM_URI] = "atom:";
+    prefixes[NamespaceParser.FH_URI] = "fh:";
     parser = new FeedParser(prefixes);
   });
 
@@ -114,6 +115,34 @@ describe("FeedParser", () => {
       };
       let parsedFeed = parser.parse(feed);
       expect(parsedFeed.updated).to.equals(updated["_"]);
+    });
+
+    it("extracts fh:complete if present", () => {
+      let complete = {};
+      let feed = {
+        "$": {
+          "xmlns:fh": {
+            "value": NamespaceParser.FH_URI,
+            "local": "fh"
+          }
+        },
+        "fh:complete": [complete]
+      };
+      let parsedFeed = parser.parse(feed);
+      expect(parsedFeed.complete).to.be.true;
+    });
+
+    it("does not extract fh:complete if not present", () => {
+      let feed = {
+        "$": {
+          "xmlns:fh": {
+            "value": NamespaceParser.FH_URI,
+            "local": "fh"
+          }
+        }
+      };
+      let parsedFeed = parser.parse(feed);
+      expect(parsedFeed.complete).to.be.false;
     });
 
     it("recognizes navigation feed", () => {
