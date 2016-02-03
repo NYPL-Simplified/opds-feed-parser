@@ -8,6 +8,7 @@ import OPDSCatalogRootLink from "../src/opds_catalog_root_link";
 import OPDSFacetLink from "../src/opds_facet_link";
 import SearchLink from "../src/search_link";
 import AlternateLink from "../src/alternate_link";
+import CompleteEntryLink from "../src/complete_entry_link";
 import OPDSAcquisitionLink from "../src/opds_acquisition_link";
 import OPDSArtworkLink from "../src/opds_artwork_link";
 import OPDSCrawlableLink from "../src/opds_crawlable_link";
@@ -217,6 +218,21 @@ describe("LinkParser", () => {
       expect(parsedLink).to.be.an.instanceof(AlternateLink);
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals(AlternateLink.REL);
+    });
+
+    it("extracts complete entry link", () => {
+      let link = {
+        "$": {
+          "href": {"value": "test href"},
+          "rel": {"value": AlternateLink.REL},
+          "type": {"value": CompleteEntryLink.TYPE}
+        }
+      };
+      let parsedLink = parser.parse(link);
+      expect(parsedLink).to.be.an.instanceof(CompleteEntryLink);
+      expect(parsedLink.href).to.equals("test href");
+      expect(parsedLink.rel).to.equals(AlternateLink.REL);
+      expect(parsedLink.type).to.equals(CompleteEntryLink.TYPE);
     });
 
     it("extracts crawlable link", () => {

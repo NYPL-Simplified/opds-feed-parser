@@ -7,6 +7,7 @@ import PriceParser from "./price_parser";
 import IndirectAcquisitionParser from "./indirect_acquisition_parser";
 import OPDSArtworkLink from "./opds_artwork_link";
 import AlternateLink from "./alternate_link";
+import CompleteEntryLink from "./complete_entry_link";
 import OPDSCrawlableLink from "./opds_crawlable_link";
 import NamespaceParser from "./namespace_parser";
 import Xml2jsOutputParser from "./xml2js_output_parser";
@@ -47,7 +48,11 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
 
       return new OPDSAcquisitionLink({ href, rel, type, title, prices, indirectAcquisitions });
     } else if (rel === AlternateLink.REL) {
-      return new AlternateLink({ href, type, title });
+      if (type === CompleteEntryLink.TYPE) {
+        return new CompleteEntryLink({ href, type, title });
+      } else {
+        return new AlternateLink({ href, type, title });
+      }
     } else if (this.isArtworkLinkRel(rel)) {
       return new OPDSArtworkLink({ href, rel, type, title });
     } else if (rel === OPDSCrawlableLink.REL) {

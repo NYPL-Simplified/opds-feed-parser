@@ -5,7 +5,9 @@ import Immutable = require("immutable");
 import EntryParser from "../src/entry_parser";
 import NamespaceParser from "../src/namespace_parser";
 import AlternateLink from "../src/alternate_link";
+import CompleteEntryLink from "../src/complete_entry_link";
 import PartialOPDSEntry from "../src/partial_opds_entry";
+import OPDSEntry from "../src/opds_entry";
 import chai = require("chai");
 let expect = chai.expect;
 
@@ -183,15 +185,30 @@ describe("EntryParser", () => {
         "$": {
           "href": {"value": "test href"},
           "rel":  {"value": AlternateLink.REL},
-          "type": {"value": "application/atom+xml;type=entry;profile=opds-catalog"}
+          "type": {"value": CompleteEntryLink.TYPE}
         }
       }];
       let entry = {
         "atom:link": links
       };
       let parsedEntry = parser.parse(entry);
-      expect(parsedEntry instanceof PartialOPDSEntry).to.be.true;
+      expect(parsedEntry).to.be.an.instanceof(PartialOPDSEntry);
       expect(parsedEntry.links.length).to.equals(1);
+    });
+
+    it("extracts full entry", () => {
+      let links = [{
+        "$": {
+          "href": {"value": "test href"},
+          "rel":  {"value": AlternateLink.REL}
+        }
+      }];
+      let entry = {
+        "atom:link": links
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry).to.be.an.instanceof(OPDSEntry);
+      expect(parsedEntry).not.to.be.an.instanceof(PartialOPDSEntry);
     });
   });
 });
