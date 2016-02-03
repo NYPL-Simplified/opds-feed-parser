@@ -136,8 +136,8 @@ describe("FeedParser", () => {
         "atom:entry": [entry],
       };
       let parsedFeed = parser.parse(feed);
-      expect(parsedFeed instanceof NavigationFeed).to.be.true;
-      expect(parsedFeed instanceof AcquisitionFeed).to.be.false;
+      expect(parsedFeed).to.be.an.instanceof(NavigationFeed);
+      expect(parsedFeed).not.to.be.an.instanceof(AcquisitionFeed);
     });
 
     it("recognizes acquisition feed", () => {
@@ -160,8 +160,8 @@ describe("FeedParser", () => {
         "atom:entry": [entry],
       };
       let parsedFeed = parser.parse(feed);
-      expect(parsedFeed instanceof AcquisitionFeed).to.be.true;
-      expect(parsedFeed instanceof NavigationFeed).to.be.false;
+      expect(parsedFeed).to.be.an.instanceof(AcquisitionFeed);
+      expect(parsedFeed).not.to.be.an.instanceof(NavigationFeed);
     });
   });
 });

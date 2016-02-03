@@ -8,8 +8,10 @@ import OPDSCatalogRootLink from "../src/opds_catalog_root_link";
 import OPDSFacetLink from "../src/opds_facet_link";
 import SearchLink from "../src/search_link";
 import AlternateLink from "../src/alternate_link";
+import CompleteEntryLink from "../src/complete_entry_link";
 import OPDSAcquisitionLink from "../src/opds_acquisition_link";
 import OPDSArtworkLink from "../src/opds_artwork_link";
+import OPDSCrawlableLink from "../src/opds_crawlable_link";
 import chai = require("chai");
 let expect = chai.expect;
 
@@ -63,7 +65,7 @@ describe("LinkParser", () => {
         }
       };
       let parsedLink = parser.parse(link);
-      expect(parsedLink instanceof OPDSCatalogRootLink).to.be.true;
+      expect(parsedLink).to.be.an.instanceof(OPDSCatalogRootLink);
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals(OPDSCatalogRootLink.REL);
     });
@@ -79,7 +81,7 @@ describe("LinkParser", () => {
         }
       };
       let parsedLink = <OPDSFacetLink>parser.parse(link);
-      expect(parsedLink instanceof OPDSFacetLink).to.be.true;
+      expect(parsedLink).to.be.an.instanceof(OPDSFacetLink);
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals(OPDSFacetLink.REL);
       expect(parsedLink.facetGroup).to.equals("test facet group");
@@ -98,7 +100,7 @@ describe("LinkParser", () => {
         }
       };
       let parsedLink = <SearchLink>parser.parse(link);
-      expect(parsedLink instanceof SearchLink).to.be.true;
+      expect(parsedLink).to.be.an.instanceof(SearchLink);
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals(SearchLink.REL);
       expect(parsedLink.totalResults).to.equals(276);
@@ -106,7 +108,7 @@ describe("LinkParser", () => {
       expect(parsedLink.startIndex).to.equals(45);
     });
 
-    it("extracts acquisition links", () => {
+    it("extracts acquisition link", () => {
       OPDSAcquisitionLink.RELS.forEach(rel => {
         let link = {
           "$": {
@@ -121,7 +123,7 @@ describe("LinkParser", () => {
       });
     });
 
-    it("extracts prices for acquisition links", () => {
+    it("extracts prices for acquisition link", () => {
       let value =  "1000.00";
       let currencyCode = "USD";
       let link = {
@@ -144,7 +146,7 @@ describe("LinkParser", () => {
       expect(castParsedLink.prices.length).to.equals(1);
     });
 
-    it("extracts nested indirect acquisitions for acquisition links", () => {
+    it("extracts nested indirect acquisition for acquisition link", () => {
       let type1 = "vnd.adobe/adept+xml";
       let type2 = "application/epub+zip";
       let type3 = "application/zip";
@@ -190,7 +192,7 @@ describe("LinkParser", () => {
       expect(castParsedLink.indirectAcquisitions[1].indirectAcquisitions[0].type).to.equals(type4);
     });
 
-    it("extracts artwork links", () => {
+    it("extracts artwork link", () => {
       OPDSArtworkLink.RELS.forEach(rel => {
         let link = {
           "$": {
@@ -213,9 +215,37 @@ describe("LinkParser", () => {
         }
       };
       let parsedLink = parser.parse(link);
-      expect(parsedLink instanceof AlternateLink).to.be.true;
+      expect(parsedLink).to.be.an.instanceof(AlternateLink);
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals(AlternateLink.REL);
+    });
+
+    it("extracts complete entry link", () => {
+      let link = {
+        "$": {
+          "href": {"value": "test href"},
+          "rel": {"value": AlternateLink.REL},
+          "type": {"value": CompleteEntryLink.TYPE}
+        }
+      };
+      let parsedLink = parser.parse(link);
+      expect(parsedLink).to.be.an.instanceof(CompleteEntryLink);
+      expect(parsedLink.href).to.equals("test href");
+      expect(parsedLink.rel).to.equals(AlternateLink.REL);
+      expect(parsedLink.type).to.equals(CompleteEntryLink.TYPE);
+    });
+
+    it("extracts crawlable link", () => {
+      let link = {
+        "$": {
+          "href": {"value": "test href"},
+          "rel": {"value": OPDSCrawlableLink.REL}
+        }
+      };
+      let parsedLink = parser.parse(link);
+      expect(parsedLink).to.be.an.instanceof(OPDSCrawlableLink);
+      expect(parsedLink.href).to.equals("test href");
+      expect(parsedLink.rel).to.equals(OPDSCrawlableLink.REL);
     });
   });
 });
