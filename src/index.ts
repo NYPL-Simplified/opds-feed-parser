@@ -16,6 +16,8 @@ import OPDSCatalogRootLink from "./opds_catalog_root_link";
 import OPDSFacetLink from "./opds_facet_link";
 import SearchLink from "./search_link";
 import AlternateLink from "./alternate_link";
+import CompleteEntryLink from "./complete_entry_link";
+import OPDSCrawlableLink from "./opds_crawlable_link";
 
 import OPDSAcquisitionLink from "./opds_acquisition_link";
 import OPDSIndirectAcquisition from "./opds_indirect_acquisition";
@@ -41,6 +43,8 @@ export {
   OPDSFacetLink,
   SearchLink,
   AlternateLink,
+  CompleteEntryLink,
+  OPDSCrawlableLink,
 
   OPDSAcquisitionLink,
   OPDSIndirectAcquisition,
