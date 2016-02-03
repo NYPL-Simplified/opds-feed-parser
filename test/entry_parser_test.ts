@@ -118,6 +118,14 @@ describe("EntryParser", () => {
       expect(parsedEntry.issued).to.equals("2016-01-01");
     });
 
+    it("extracts language", () => {
+      let entry = {
+        "dc:language": [{"_": "it"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.language).to.equals("it");
+    });
+
     it("extracts rights", () => {
       let entry = {
         "atom:rights": [{"_": "test rights"}]

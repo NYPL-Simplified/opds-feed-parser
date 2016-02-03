@@ -13,6 +13,7 @@ export default class OPDSEntry {
   categories: Array<Category>;
   identifiers: Array<string>;
   issued: string;
+  language: string;
   rights: string;
   published: string;
   summary: Summary;
