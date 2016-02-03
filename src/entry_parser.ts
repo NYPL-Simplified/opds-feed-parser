@@ -38,6 +38,7 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
     }
 
     let issued = this.parseSubtagContent(entry, dcPrefix + "issued");
+    let language = this.parseSubtagContent(entry, dcPrefix + "language");
     let rights = this.parseSubtagContent(entry, atomPrefix + "rights");
     let published = this.parseSubtagContent(entry, atomPrefix + "published");
 
@@ -72,6 +73,7 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
        categories,
        identifiers,
        issued,
+       language,
        rights,
        published,
        summary
