@@ -18,6 +18,7 @@ import SearchLink from "./search_link";
 import AlternateLink from "./alternate_link";
 
 import OPDSAcquisitionLink from "./opds_acquisition_link";
+import OPDSIndirectAcquisition from "./opds_indirect_acquisition";
 import OPDSPrice from "./opds_price";
 import OPDSArtworkLink from "./opds_artwork_link";
 
@@ -42,6 +43,7 @@ export {
   AlternateLink,
 
   OPDSAcquisitionLink,
+  OPDSIndirectAcquisition,
   OPDSPrice,
   OPDSArtworkLink
 };
