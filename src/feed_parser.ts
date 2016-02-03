@@ -12,6 +12,7 @@ import Xml2jsOutputParser from "./xml2js_output_parser";
 export default class FeedParser extends Xml2jsOutputParser<OPDSFeed> {
   parse(feed: any): OPDSFeed {
     let atomPrefix = this.prefixes[NamespaceParser.ATOM_URI];
+    let fhPrefix = this.prefixes[NamespaceParser.FH_URI];
 
     let linkParser = new LinkParser(this.prefixes);
     let entryParser = new EntryParser(this.prefixes);
@@ -21,7 +22,8 @@ export default class FeedParser extends Xml2jsOutputParser<OPDSFeed> {
     let updated = this.parseSubtagContent(feed, atomPrefix + "updated");
     let links = this.parseSubtags(feed, atomPrefix + "link", linkParser);
     let entries = this.parseSubtags(feed, atomPrefix + "entry", entryParser);
-    let args = { id, title, updated, entries, links };
+    let complete = !!feed[fhPrefix + "complete"];
+    let args = { id, title, updated, entries, links, complete };
 
     let allEntriesHaveAcquisitionLinks: boolean = entries.every((entry) => {
       return !!entry.links.find((link) => {
