@@ -192,5 +192,28 @@ describe("FeedParser", () => {
       expect(parsedFeed).to.be.an.instanceof(AcquisitionFeed);
       expect(parsedFeed).not.to.be.an.instanceof(NavigationFeed);
     });
+
+    it("keeps unparsed data", () => {
+      let links = [{
+        "$": {
+          "href": {"value": "test href"},
+          "rel":  {"value": OPDSAcquisitionLink.GENERIC_REL}
+        }
+      }];
+      let entry = {
+        "atom:link": links
+      };
+      let feed = {
+        "$": {
+          "xmlns:atom": {
+            "value": NamespaceParser.ATOM_URI,
+            "local": "atom"
+          }
+        },
+        "atom:entry": [entry],
+      };
+      let parsedFeed = parser.parse(feed);
+      expect(parsedFeed.unparsed).to.eql(feed);
+    });
   });
 });

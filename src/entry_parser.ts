@@ -76,7 +76,8 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
        language,
        rights,
        published,
-       summary
+       summary,
+       unparsed: entry
     });
   }
 }
