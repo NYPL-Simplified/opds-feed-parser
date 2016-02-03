@@ -117,7 +117,7 @@ describe("FeedParser", () => {
       expect(parsedFeed.updated).to.equals(updated["_"]);
     });
 
-    it("extracts fh:complete", () => {
+    it("extracts fh:complete if pesent", () => {
       let complete = {};
       let feed = {
         "$": {
@@ -130,6 +130,19 @@ describe("FeedParser", () => {
       };
       let parsedFeed = parser.parse(feed);
       expect(parsedFeed.complete).to.be.true;
+    });
+
+    it("does not extract fh:complete if not present", () => {
+      let feed = {
+        "$": {
+          "xmlns:fh": {
+            "value": NamespaceParser.FH_URI,
+            "local": "fh"
+          }
+        }
+      };
+      let parsedFeed = parser.parse(feed);
+      expect(parsedFeed.complete).not.to.be.true;
     });
 
     it("recognizes navigation feed", () => {
