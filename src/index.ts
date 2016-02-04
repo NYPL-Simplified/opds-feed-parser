@@ -23,6 +23,7 @@ import OPDSAcquisitionLink from "./opds_acquisition_link";
 import OPDSIndirectAcquisition from "./opds_indirect_acquisition";
 import OPDSPrice from "./opds_price";
 import OPDSArtworkLink from "./opds_artwork_link";
+import OPDSCollectionLink from "./opds_collection_link";
 
 export default OPDSParser;
 
@@ -49,5 +50,6 @@ export {
   OPDSAcquisitionLink,
   OPDSIndirectAcquisition,
   OPDSPrice,
-  OPDSArtworkLink
+  OPDSArtworkLink,
+  OPDSCollectionLink
 };
