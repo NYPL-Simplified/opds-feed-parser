@@ -1,5 +1,6 @@
 ///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
 ///<reference path="../typings/main/ambient/chai/chai.d.ts" />
+///<reference path="../typings/main/ambient/node/node.d.ts" />
 import OPDSFeed from "../src/opds_feed";
 import {
   NavigationFeed,
