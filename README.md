@@ -1,5 +1,5 @@
 # opds-feed-parser
-Javascript OPDS feed parser
+Javascript OPDS feed parser. Covers [OPDS 1.1](http://opds-spec.org/specs/opds-catalog-1-1-20110627/).
 
 
 ## Usage
