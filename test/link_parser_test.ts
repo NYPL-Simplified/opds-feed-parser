@@ -11,6 +11,7 @@ import CompleteEntryLink from "../src/complete_entry_link";
 import OPDSAcquisitionLink from "../src/opds_acquisition_link";
 import OPDSArtworkLink from "../src/opds_artwork_link";
 import OPDSCrawlableLink from "../src/opds_crawlable_link";
+import OPDSCollectionLink from "../src/opds_collection_link";
 import chai = require("chai");
 let expect = chai.expect;
 
@@ -245,6 +246,21 @@ describe("LinkParser", () => {
       expect(parsedLink).to.be.an.instanceof(OPDSCrawlableLink);
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals(OPDSCrawlableLink.REL);
+    });
+
+    it("extracts collection link", () => {
+      let link = {
+        "$": {
+          "href": {"value": "test href"},
+          "rel": {"value": OPDSCollectionLink.REL},
+          "title": {"value": "test title"}
+        }
+      };
+      let parsedLink = parser.parse(link);
+      expect(parsedLink).to.be.an.instanceof(OPDSCollectionLink);
+      expect(parsedLink.href).to.equals("test href");
+      expect(parsedLink.title).to.equals("test title");
+      expect(parsedLink.rel).to.equals(OPDSCollectionLink.REL);
     });
   });
 });

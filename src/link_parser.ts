@@ -9,6 +9,7 @@ import OPDSArtworkLink from "./opds_artwork_link";
 import AlternateLink from "./alternate_link";
 import CompleteEntryLink from "./complete_entry_link";
 import OPDSCrawlableLink from "./opds_crawlable_link";
+import OPDSCollectionLink from "./opds_collection_link";
 import NamespaceParser from "./namespace_parser";
 import Xml2jsOutputParser from "./xml2js_output_parser";
 
@@ -57,6 +58,8 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
       return new OPDSArtworkLink({ href, rel, type, title });
     } else if (rel === OPDSCrawlableLink.REL) {
       return new OPDSCrawlableLink({ href, rel, type, title });
+    } else if (rel === OPDSCollectionLink.REL) {
+      return new OPDSCollectionLink({ href, rel, type, title });
     } else {
       return new OPDSLink({ href, rel, type, title });
     }
