@@ -21,7 +21,14 @@ export default class FeedParser extends Xml2jsOutputParser<OPDSFeed> {
     let links = this.parseSubtags(feed, atomPrefix + "link", linkParser);
     let entries = this.parseSubtags(feed, atomPrefix + "entry", entryParser);
     let complete = !!feed[fhPrefix + "complete"];
-    let args = { id, title, updated, entries, links, complete, unparsed: feed };
+
+    let openSearchPrefix = this.prefixes[NamespaceParser.OPEN_SEARCH_URI];
+    let totalResults = parseInt(this.parseSubtagContent(feed, openSearchPrefix + "totalResults"), 10);
+    let startIndex = parseInt(this.parseSubtagContent(feed, openSearchPrefix + "startIndex"), 10);
+    let itemsPerPage = parseInt(this.parseSubtagContent(feed, openSearchPrefix + "itemsPerPage"), 10);
+    let search = { totalResults, startIndex, itemsPerPage };
+
+    let args = { id, title, updated, entries, links, complete, search, unparsed: feed };
 
     let allEntriesHaveAcquisitionLinks: boolean = entries.every((entry) => {
       return !!entry.links.find((link) => {

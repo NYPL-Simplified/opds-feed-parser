@@ -22,7 +22,6 @@ describe("LinkParser", () => {
     let prefixes: PrefixMap = {};
     prefixes[NamespaceParser.OPDS_URI] = "opds:";
     prefixes[NamespaceParser.THR_URI] = "thr:";
-    prefixes[NamespaceParser.OPEN_SEARCH_URI] = "opensearch:";
     parser = new LinkParser(prefixes);
   });
 
@@ -94,18 +93,12 @@ describe("LinkParser", () => {
         "$": {
           "href": {"value": "test href"},
           "rel": {"value": SearchLink.REL},
-          "opensearch:totalResults": {"value": "276"},
-          "opensearch:itemsPerPage": {"value": "20"},
-          "opensearch:startIndex": {"value": "45"}
         }
       };
       let parsedLink = <SearchLink>parser.parse(link);
       expect(parsedLink).to.be.an.instanceof(SearchLink);
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.rel).to.equals(SearchLink.REL);
-      expect(parsedLink.totalResults).to.equals(276);
-      expect(parsedLink.itemsPerPage).to.equals(20);
-      expect(parsedLink.startIndex).to.equals(45);
     });
 
     it("extracts acquisition link", () => {
