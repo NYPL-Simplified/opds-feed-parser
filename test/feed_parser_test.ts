@@ -15,6 +15,7 @@ describe("FeedParser", () => {
   beforeEach(() => {
     let prefixes: PrefixMap = {};
     prefixes[NamespaceParser.ATOM_URI] = "atom:";
+    prefixes[NamespaceParser.OPEN_SEARCH_URI] = "opensearch:";
     prefixes[NamespaceParser.FH_URI] = "fh:";
     parser = new FeedParser(prefixes);
   });
@@ -142,6 +143,33 @@ describe("FeedParser", () => {
       };
       let parsedFeed = parser.parse(feed);
       expect(parsedFeed.complete).to.be.false;
+    });
+
+    it("extracts search info", () => {
+      let totalResults = {
+        "_": "22"
+      };
+      let startIndex = {
+        "_": "5"
+      };
+      let itemsPerPage = {
+        "_": "12"
+      };
+      let feed = {
+        "$": {
+          "xmlns:atom": {
+            "value": NamespaceParser.ATOM_URI,
+            "local": "atom"
+          }
+        },
+        "opensearch:totalResults": [totalResults],
+        "opensearch:startIndex": [startIndex],
+        "opensearch:itemsPerPage": [itemsPerPage]
+      };
+      let parsedFeed = parser.parse(feed);
+      expect(parsedFeed.search.totalResults).to.equals(22);
+      expect(parsedFeed.search.startIndex).to.equals(5);
+      expect(parsedFeed.search.itemsPerPage).to.equals(12);
     });
 
     it("recognizes navigation feed", () => {

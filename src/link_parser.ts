@@ -33,13 +33,7 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
 
       return new OPDSFacetLink({ href, type, title, facetGroup, activeFacet, count });
     } else if (rel === SearchLink.REL) {
-      let openSearchPrefix = this.prefixes[NamespaceParser.OPEN_SEARCH_URI];
-
-      let totalResults = parseInt(this.parseAttribute(link, openSearchPrefix + "totalResults"), 10);
-      let startIndex = parseInt(this.parseAttribute(link, openSearchPrefix + "startIndex"), 10);
-      let itemsPerPage = parseInt(this.parseAttribute(link, openSearchPrefix + "itemsPerPage"), 10);
-
-      return new SearchLink({ href, type, title, totalResults, startIndex, itemsPerPage });
+      return new SearchLink({ href, type, title });
     } else if (this.isAcquisitionLinkRel(rel)) {
       let opdsPrefix = this.prefixes[NamespaceParser.OPDS_URI];
       let priceParser = new PriceParser(this.prefixes);

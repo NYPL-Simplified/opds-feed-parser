@@ -8,6 +8,11 @@ export default class OPDSFeed {
   entries: Array<OPDSEntry>;
   links: Array<OPDSLink>;
   complete: boolean;
+  search: {
+    totalResults: number,
+    startIndex: number,
+    itemsPerPage: number,
+  };
   unparsed: any;
 
   constructor(args: OPDSFeedArgs) {

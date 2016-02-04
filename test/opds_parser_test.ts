@@ -92,6 +92,7 @@ describe("OPDSParser", () => {
             expect(result.id).to.equals("main.xml");
             expect(result.title).to.equals("First Acquisition Feed");
             expect(result.updated).to.equals("2012-10-20T01:11:18Z");
+            expect(result.search.totalResults).to.equals(18);
 
             expect(result.links.length).to.equals(4);
             expect(result.links[1].href).to.equals("../root.xml");
