@@ -1,6 +1,3 @@
-///<reference path="../typings/main/ambient/core-js/core-js.d.ts" />
-///<reference path="../typings/main/ambient/xml2js/xml2js.d.ts" />
-
 import OPDSFeed from "./opds_feed";
 import NamespaceParser from "./namespace_parser";
 import FeedParser from "./feed_parser";
