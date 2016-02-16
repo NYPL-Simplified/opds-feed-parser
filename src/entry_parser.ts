@@ -43,16 +43,17 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
     let published = this.parseSubtagContent(entry, atomPrefix + "published");
 
     let summaryLink;
-    let summaryContent = this.parseSubtagContent(entry, atomPrefix + "summary");
-    if (!summaryContent) {
-      summaryContent = this.parseSubtagContent(entry, atomPrefix + "content");
-    }
+    let summaryContent = this.parseSubtagContent(entry, atomPrefix + "content");
     if (!summaryContent) {
       let subtag = entry[atomPrefix + "content"];
       if (subtag && subtag.length > 0) {
         summaryLink = this.parseAttribute(subtag[0], "src");
       }
     }
+    if (!summaryContent) {
+      summaryContent = this.parseSubtagContent(entry, atomPrefix + "summary");
+    }
+
     let summary = new Summary({ content: summaryContent, link: summaryLink });
 
     let entryClass = OPDSEntry;
