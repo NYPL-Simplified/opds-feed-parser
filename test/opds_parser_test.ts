@@ -5,8 +5,10 @@ import OPDSFeed from "../src/opds_feed";
 import {
   NavigationFeed,
   AcquisitionFeed,
+  OPDSEntry,
   OPDSCatalogRootLink,
   SearchLink,
+  AlternateLink,
   OPDSAcquisitionLink,
   OPDSArtworkLink
 } from "../src/index";
@@ -23,7 +25,7 @@ describe("OPDSParser", () => {
   });
 
   describe("#parse", () => {
-    it("raises error when input has no feed", (done) => {
+    it("raises error when input has no feed or entry", (done) => {
       let opds = "<test></test>";
       let promise: Promise<OPDSFeed> = parser.parse(opds);
       promise.then(() => {
@@ -114,6 +116,34 @@ describe("OPDSParser", () => {
             expect(result.entries[0].links[0]).to.be.an.instanceof(OPDSAcquisitionLink);
             expect(result.entries[0].links[0].href).to.equals("http://www.feedbooks.com/book/52.epub");
             expect(result.entries[0].links[1]).to.be.an.instanceof(OPDSArtworkLink);
+          }).then(done, done);
+        }
+      });
+    });
+
+    it("parses example library simplified entry", (done) => {
+      fs.readFile("test/files/entry.xml", "utf8", (error, data) => {
+        if (error) {
+          done(error);
+        } else {
+          let promise: Promise<OPDSEntry> = parser.parse(data);
+          promise.then((result) => {
+            expect(result).to.be.an.instanceof(OPDSEntry);
+            expect(result).not.to.be.an.instanceof(OPDSFeed);
+            expect(result.id).to.equals("urn:librarysimplified.org/terms/id/Overdrive%20ID/135d0478-1ab9-4cc1-a1aa-2aa616b1218c");
+            expect(result.title).to.equals("The Frances Hodgson Burnett Megapack");
+            expect(result.updated).to.equals("2016-01-08T21:38:19Z");
+
+            expect(result.authors.length).to.equals(1);
+            expect(result.authors[0].name).to.equals("Frances Hodgson Burnett");
+
+            expect(result.links.length).to.equals(5);
+            expect(result.links[2]).to.be.an.instanceof(AlternateLink);
+            expect(result.links[4]).to.be.an.instanceof(OPDSAcquisitionLink);
+            expect((<OPDSAcquisitionLink>result.links[4]).indirectAcquisitions.length).to.equals(4);
+
+            expect(result.categories.length).to.equals(4);
+            expect(result.language).to.equals("en");
           }).then(done, done);
         }
       });
