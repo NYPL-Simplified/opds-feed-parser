@@ -15,6 +15,7 @@ export default class OPDSEntry {
   issued: string;
   language: string;
   rights: string;
+  publisher: string;
   published: string;
   summary: Summary;
   unparsed: any;

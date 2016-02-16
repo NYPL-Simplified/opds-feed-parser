@@ -179,6 +179,14 @@ describe("EntryParser", () => {
       expect(parsedContributor.uri).to.equals("test uri");
     });
 
+    it("extracts publisher", () => {
+      let entry = {
+        "dc:publisher": [{"_": "publisher"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.publisher).to.equals("publisher");
+    });
+
     it("extracts published", () => {
       let entry = {
         "atom:published": [{"_": "2016-01-01"}]
