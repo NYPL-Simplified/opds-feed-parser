@@ -164,6 +164,15 @@ describe("EntryParser", () => {
       expect(parsedEntry.summary.content).to.be.undefined;
     });
 
+    it("prefers summary from atom:content over atom:summary", () => {
+      let entry = {
+        "atom:summary": [{"_": "summary"}],
+        "atom:content": [{"_": "content"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.summary.content).to.equals("content");
+    });
+
     it("extracts contributors", () => {
       let contributors = [{
         "name": [{"_": "test name"}],
