@@ -1,0 +1,33 @@
+<entry xmlns:bibframe="http://bibframe.org/vocab/" xmlns:simplified="http://librarysimplified.org/terms/" xmlns:app="http://www.w3.org/2007/app" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:opds="http://opds-spec.org/2010/catalog" xmlns:schema="http://schema.org/" xmlns="http://www.w3.org/2005/Atom" schema:additionalType="http://schema.org/Book">
+<id>urn:librarysimplified.org/terms/id/Overdrive%20ID/135d0478-1ab9-4cc1-a1aa-2aa616b1218c</id>
+<title>The Frances Hodgson Burnett Megapack</title>
+<bibframe:distribution bibframe:ProviderName="Overdrive"/>
+<author><name>Frances Hodgson Burnett</name></author>
+<summary type="html">&lt;p&gt;The Frances Hodgson Burnett Megapack collects 40 classic works by the author of &lt;i&gt;Little Lord Fauntleroy, A Little Princess&lt;/i&gt;, and &lt;i&gt;The Secret Garden&lt;/i&gt;. Almost 5,000 pages of great reading!&lt;p&gt;THE SECRET GARDEN&lt;p&gt;LITTLE LORD FAUNTLEROY&lt;p&gt;A LITTLE PRINCESS&lt;p&gt;THE LOST PRINCE&lt;p&gt;A LADY OF QUALITY&lt;p&gt;HIS GRACE OF OSMONDE&lt;p&gt;THE LAND OF THE BLUE FLOWER&lt;p&gt;THE LITTLE HUNCHBACK ZIA&lt;p&gt;LITTLE SAINT ELIZABETH&lt;p&gt;THE STORY OF PRINCE FAIRYFOOT&lt;p&gt;THE PROUD LITTLE GRAIN OF WHEAT&lt;p&gt;BEHIND THE WHITE BRICK&lt;p&gt;LODUSKY&lt;p&gt;M&#200;RE GIRAUDS LITTLE DAUGHTER&lt;p&gt;"LE MONSIEUR DE LA PETITE DAME"&lt;p&gt;MY ROBIN&lt;p&gt;ONE DAY AT ARLE&lt;p&gt;THE PRETTY SISTER OF JOS&#201;&lt;p&gt;RACKETTY-PACKETTY HOUSE&lt;p&gt;SARA CREWE&lt;p&gt;SETH&lt;p&gt;THE SHUTTLE&lt;p&gt;SURLY TIM&lt;p&gt;THAT LASS O' LOWRIE'S&lt;p&gt;THEO&lt;p&gt;T. TEMBAROM&lt;p&gt;VAGABONDIA&lt;p&gt;THE WHITE PEOPLE&lt;p&gt;LOUISIANA&lt;p&gt;THE GOOD WOLF&lt;p&gt;BARTY CRUSOE AND HIS MAN SATURDAY&lt;p&gt;THE COZY LION&lt;p&gt;THE DAWN OF A TOMORROW&lt;p&gt;EMILY FOX-SETON&lt;p&gt;ESMERALDA&lt;p&gt;A FAIR BARBARIAN&lt;p&gt;THE HEAD OF THE HOUSE OF COOMBE&lt;p&gt;ROBIN&lt;p&gt;IN CONNECTION WITH THE DE WILLOUGHBY CLAIM&lt;p&gt;IN THE CLOSED ROOM&lt;p&gt;If you enjoy this volume, don't forget to search your favorite ebook store for "Wildside Megapack" to see the 100+ entries in this best-selling series, including volumes of science fiction, fantasy, mystery, westerns, classics, young adult books, and much, much more! (Sort by publication date to see the most recent entries.)</summary>
+<updated>2016-01-08T21:38:19Z</updated>
+<simplified:pwid>500010e3-884f-58d1-2cca-b56429de23fb</simplified:pwid>
+<link href="https://d3pqhns20516vc.cloudfront.net/Overdrive/135d0478-1ab9-4cc1-a1aa-2aa616b1218c/cover.jpg" type="image/jpeg" rel="http://opds-spec.org/image"/>
+<link href="https://d3pqhns20516vc.cloudfront.net/scaled/300/Overdrive/135d0478-1ab9-4cc1-a1aa-2aa616b1218c/cover.jpg" type="image/jpeg" rel="http://opds-spec.org/image/thumbnail"/>
+<category term="Adult" scheme="http://schema.org/audience" label="Adult"/>
+<category term="18" scheme="http://schema.org/typicalAgeRange" label="18"/>
+<category term="http://librarysimplified.org/terms/genres/Simplified/Classics" scheme="http://librarysimplified.org/terms/genres/Simplified/" label="Classics"/>
+<category term="http://librarysimplified.org/terms/genres/Simplified/Fantasy" scheme="http://librarysimplified.org/terms/genres/Simplified/" label="Fantasy"/>
+<dcterms:language>en</dcterms:language>
+<dcterms:publisher>Wildside Press LLC</dcterms:publisher>
+<published>2014-08-10T13:00:33Z</published>
+<link href="http://circulation.librarysimplified.org/works/Overdrive/135d0478-1ab9-4cc1-a1aa-2aa616b1218c" type="application/atom+xml;type=entry;profile=opds-catalog" rel="alternate"/>
+<link href="http://circulation.librarysimplified.org/works/Overdrive/135d0478-1ab9-4cc1-a1aa-2aa616b1218c/report" rel="issues"/>
+<link href="http://circulation.librarysimplified.org/works/Overdrive/135d0478-1ab9-4cc1-a1aa-2aa616b1218c/borrow" rel="http://opds-spec.org/acquisition/borrow" type="application/atom+xml;type=entry;profile=opds-catalog">
+<opds:indirectAcquisition type="application/epub+zip"/>
+<opds:indirectAcquisition type="application/pdf"/>
+<opds:indirectAcquisition type="vnd.adobe/adept+xml">
+<opds:indirectAcquisition type="application/epub+zip"/>
+</opds:indirectAcquisition>
+<opds:indirectAcquisition type="vnd.adobe/adept+xml">
+<opds:indirectAcquisition type="application/pdf"/>
+</opds:indirectAcquisition>
+<opds:availability status="available"/>
+<opds:holds total="0"/>
+<opds:copies available="1" total="1"/>
+</link>
+</entry>
