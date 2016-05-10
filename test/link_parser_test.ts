@@ -29,14 +29,14 @@ describe("LinkParser", () => {
     it("extracts link attributes", () => {
       let link = {
         "$": {
-          "href": {"value": "test href"},
+          "href": {"value": "test%20href"},
           "rel":  {"value": "test rel"},
           "type": {"value": "test type"},
           "title": {"value": "test title"}
         }
       };
       let parsedLink = parser.parse(link);
-      expect(parsedLink.href).to.equals("test href");
+      expect(parsedLink.href).to.equals("test href"); // url should be decoded
       expect(parsedLink.rel).to.equals("test rel");
       expect(parsedLink.type).to.equals("test type");
       expect(parsedLink.title).to.equals("test title");
