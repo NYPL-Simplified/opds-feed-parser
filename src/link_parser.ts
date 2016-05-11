@@ -15,7 +15,7 @@ import Xml2jsOutputParser from "./xml2js_output_parser";
 
 export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
   parse(link: any): OPDSLink {
-    let href = decodeURIComponent(this.parseAttribute(link, "href"));
+    let href = this.parseAttribute(link, "href");
     let rel = this.parseAttribute(link, "rel");
     let type = this.parseAttribute(link, "type");
     let title = this.parseAttribute(link, "title");
