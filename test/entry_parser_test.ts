@@ -45,6 +45,14 @@ describe("EntryParser", () => {
       expect(parsedEntry.title).to.equals("test title");
     });
 
+    it("extracts subtitle", () => {
+      let entry = {
+        "atom:subtitle": [{"_": "test subtitle"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.subtitle).to.equals("test subtitle");
+    });
+
     it("extracts authors", () => {
       let authors = [{
         "name": [{"_": "test name"}],
