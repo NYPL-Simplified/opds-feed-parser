@@ -12,16 +12,21 @@ import OPDSAcquisitionLink from "../src/opds_acquisition_link";
 import OPDSArtworkLink from "../src/opds_artwork_link";
 import OPDSCrawlableLink from "../src/opds_crawlable_link";
 import OPDSCollectionLink from "../src/opds_collection_link";
+import AvailabilityParser from "../src/availability_parser";
+import HoldsParser from "../src/holds_parser";
+import CopiesParser from "../src/copies_parser";
 import chai = require("chai");
 let expect = chai.expect;
 
 describe("LinkParser", () => {
   let parser: LinkParser;
+  let prefixes: PrefixMap;
 
   beforeEach(() => {
-    let prefixes: PrefixMap = {};
-    prefixes[NamespaceParser.OPDS_URI] = "opds:";
-    prefixes[NamespaceParser.THR_URI] = "thr:";
+    prefixes = {
+      [NamespaceParser.OPDS_URI]: "opds:",
+      [NamespaceParser.THR_URI]: "thr:"
+    };
     parser = new LinkParser(prefixes);
   });
 
@@ -183,6 +188,51 @@ describe("LinkParser", () => {
       expect(castParsedLink.indirectAcquisitions[0].indirectAcquisitions[0].type).to.equals(type2);
       expect(castParsedLink.indirectAcquisitions[1].type).to.equals(type3);
       expect(castParsedLink.indirectAcquisitions[1].indirectAcquisitions[0].type).to.equals(type4);
+    });
+
+    it("extracts availability, holds, copies for acquisition link", () => {
+      let link = {
+        $: {
+          href: { value: "test href" },
+          rel: { value: OPDSAcquisitionLink.BORROW_REL }
+        },
+        "opds:availability": [
+          {
+            $: {
+              status: { value: "unavailable" },
+              until: { value: "2016-11-02T19:46:27Z" }
+            }
+          }
+        ],
+        "opds:holds": [
+          {
+            $: {
+              total: { value: "29" },
+              position: { value: "11" }
+            }
+          }
+        ],
+        "opds:copies": [
+          {
+            $: {
+              total: { value: "7" },
+              available: { value: "0" }
+            }
+          }
+        ]
+      };
+      let parsedLink = parser.parse(link);
+      expect(parsedLink).to.be.an.instanceof(OPDSAcquisitionLink);
+      let castParsedLink = <OPDSAcquisitionLink>parsedLink;
+      expect(castParsedLink.availability).to.deep.equal(
+        new AvailabilityParser(prefixes).parse(link["opds:availability"][0])
+      );
+      expect(castParsedLink.holds).to.deep.equal(
+        new HoldsParser(prefixes).parse(link["opds:holds"][0])
+      );
+      expect(castParsedLink.copies).to.deep.equal(
+        new CopiesParser(prefixes).parse(link["opds:copies"][0])
+      );
     });
 
     it("extracts artwork link", () => {

@@ -5,6 +5,9 @@ import SearchLink from "./search_link";
 import OPDSAcquisitionLink from "./opds_acquisition_link";
 import PriceParser from "./price_parser";
 import IndirectAcquisitionParser from "./indirect_acquisition_parser";
+import AvailabilityParser from "./availability_parser";
+import HoldsParser from "./holds_parser";
+import CopiesParser from "./copies_parser";
 import OPDSArtworkLink from "./opds_artwork_link";
 import AlternateLink from "./alternate_link";
 import CompleteEntryLink from "./complete_entry_link";
@@ -40,8 +43,17 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
       let prices = this.parseSubtags(link, opdsPrefix + "price", priceParser);
       let indirectAcquisitionParser = new IndirectAcquisitionParser(this.prefixes);
       let indirectAcquisitions = this.parseSubtags(link, opdsPrefix + "indirectAcquisition", indirectAcquisitionParser);
+      let availabilityParser = new AvailabilityParser(this.prefixes);
+      let availability = this.parseSubtag(link, opdsPrefix + "availability", availabilityParser);
+      let holdsParser = new HoldsParser(this.prefixes);
+      let holds = this.parseSubtag(link, opdsPrefix + "holds", holdsParser);
+      let copiesParser = new CopiesParser(this.prefixes);
+      let copies = this.parseSubtag(link, opdsPrefix + "copies", copiesParser);
 
-      return new OPDSAcquisitionLink({ href, rel, type, title, prices, indirectAcquisitions });
+      return new OPDSAcquisitionLink({
+        href, rel, type, title, prices, indirectAcquisitions,
+        availability, holds, copies
+      });
     } else if (rel === AlternateLink.REL) {
       if (type === CompleteEntryLink.TYPE) {
         return new CompleteEntryLink({ href, type, title });

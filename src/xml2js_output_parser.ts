@@ -41,4 +41,15 @@ export default class Xml2jsOutputParser<T> {
     }
     return parsed;
   }
+
+  parseSubtag<U>(tag: XMLInterface.XMLTagWithSubtags, subtagName: string, subtagParser: Xml2jsOutputParser<U>): U {
+    let subtags = tag[subtagName];
+    let parsed: U;
+    if (subtags && subtags.length) {
+      parsed = subtagParser.parse(subtags[0]);
+    } else {
+      parsed = null;
+    }
+    return parsed;
+  }
 }
