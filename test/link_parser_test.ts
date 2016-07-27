@@ -12,6 +12,7 @@ import OPDSAcquisitionLink from "../src/opds_acquisition_link";
 import OPDSArtworkLink from "../src/opds_artwork_link";
 import OPDSCrawlableLink from "../src/opds_crawlable_link";
 import OPDSCollectionLink from "../src/opds_collection_link";
+import OPDSShelfLink from "../src/opds_shelf_link";
 import AvailabilityParser from "../src/availability_parser";
 import HoldsParser from "../src/holds_parser";
 import CopiesParser from "../src/copies_parser";
@@ -304,6 +305,19 @@ describe("LinkParser", () => {
       expect(parsedLink.href).to.equals("test href");
       expect(parsedLink.title).to.equals("test title");
       expect(parsedLink.rel).to.equals(OPDSCollectionLink.REL);
+    });
+
+    it("extracts shelf link", () => {
+      let link = {
+        "$": {
+          "href": {"value": "test href"},
+          "rel": {"value": OPDSShelfLink.REL}
+        }
+      };
+      let parsedLink = parser.parse(link);
+      expect(parsedLink).to.be.an.instanceof(OPDSShelfLink);
+      expect(parsedLink.href).to.equals("test href");
+      expect(parsedLink.rel).to.equals(OPDSShelfLink.REL);
     });
   });
 });
