@@ -18,6 +18,7 @@ import SearchLink from "./search_link";
 import AlternateLink from "./alternate_link";
 import CompleteEntryLink from "./complete_entry_link";
 import OPDSCrawlableLink from "./opds_crawlable_link";
+import OPDSShelfLink from "./opds_shelf_link";
 
 import OPDSAcquisitionLink from "./opds_acquisition_link";
 import OPDSIndirectAcquisition from "./opds_indirect_acquisition";
@@ -46,6 +47,7 @@ export {
   AlternateLink,
   CompleteEntryLink,
   OPDSCrawlableLink,
+  OPDSShelfLink,
 
   OPDSAcquisitionLink,
   OPDSIndirectAcquisition,
