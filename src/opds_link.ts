@@ -11,7 +11,7 @@ export default class OPDSLink {
 
 export interface OPDSLinkArgs {
   href: string;
-  type: string;
-  title: string;
+  type?: string;
+  title?: string;
   rel?: string;
 }
