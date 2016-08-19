@@ -17,6 +17,7 @@ describe("EntryParser", () => {
     let prefixes: PrefixMap = {};
     prefixes[NamespaceParser.ATOM_URI] = "atom:";
     prefixes[NamespaceParser.DC_URI] = "dc:";
+    prefixes[NamespaceParser.SCHEMA_URI] = "schema:";
     parser = new EntryParser(prefixes);
   });
 
@@ -58,6 +59,19 @@ describe("EntryParser", () => {
       let parsedAuthor = parsedEntry.authors[0];
       expect(parsedAuthor.name).to.equals("test name");
       expect(parsedAuthor.uri).to.equals("test uri");
+    });
+
+    it("extracts series", () => {
+      let series = [{
+        "$": {
+          "name": {"value": "test series"}
+        }
+      }];
+      let entry = {
+        "schema:Series": series
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.series.name).to.equals("test series");
     });
 
     it("extracts categories", () => {

@@ -3,6 +3,7 @@ import PartialOPDSEntry from "./partial_opds_entry";
 import CompleteEntryLink from "./complete_entry_link";
 import LinkParser from "./link_parser";
 import ContributorParser from "./contributor_parser";
+import SeriesParser from "./series_parser";
 import CategoryParser from "./category_parser";
 import NamespaceParser from "./namespace_parser";
 import Summary from "./summary";
@@ -13,6 +14,7 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
     let linkParser = new LinkParser(this.prefixes);
     let atomPrefix = this.prefixes[NamespaceParser.ATOM_URI];
     let dcPrefix = this.prefixes[NamespaceParser.DC_URI];
+    let schemaPrefix = this.prefixes[NamespaceParser.SCHEMA_URI];
 
     let id = this.parseSubtagContent(entry, atomPrefix + "id");
     let updated = this.parseSubtagContent(entry, atomPrefix + "updated");
@@ -21,6 +23,9 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
     let contributorParser = new ContributorParser(this.prefixes);
     let authors = this.parseSubtags(entry, atomPrefix + "author", contributorParser);
     let contributors = this.parseSubtags(entry, atomPrefix + "contributor", contributorParser);
+
+    let seriesParser = new SeriesParser(this.prefixes);
+    let series = this.parseSubtag(entry, schemaPrefix + "Series", seriesParser);
 
     let links = this.parseSubtags(entry, atomPrefix + "link", linkParser);
 
@@ -71,6 +76,7 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
        title,
        authors,
        contributors,
+       series,
        links,
        categories,
        identifiers,
