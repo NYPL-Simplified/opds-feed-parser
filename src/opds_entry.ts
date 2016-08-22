@@ -1,5 +1,6 @@
 import OPDSLink from "./opds_link";
 import Contributor from "./contributor";
+import Series from "./series";
 import Category from "./category";
 import Summary from "./summary";
 
@@ -9,6 +10,7 @@ export default class OPDSEntry {
   title: string;
   authors: Array<Contributor>;
   contributors: Array<Contributor>;
+  series: Series;
   links: Array<OPDSLink>;
   categories: Array<Category>;
   identifiers: Array<string>;
