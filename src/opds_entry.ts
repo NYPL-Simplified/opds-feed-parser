@@ -8,6 +8,7 @@ export default class OPDSEntry {
   id: string;
   updated: string;
   title: string;
+  subtitle: string;
   authors: Array<Contributor>;
   contributors: Array<Contributor>;
   series: Series;
