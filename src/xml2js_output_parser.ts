@@ -12,12 +12,14 @@ export default class Xml2jsOutputParser<T> {
   }
 
   parseAttribute(tag: XMLInterface.XMLTagWithAttributes, attributeName: string): any {
-    let attribute = tag["$"][attributeName];
-    if (attribute) {
-      return attribute.value;
-    } else {
-      return undefined;
+    let attributes = tag["$"];
+    if (attributes) {
+      let attribute = attributes[attributeName];
+      if (attribute) {
+        return attribute.value;
+      }
     }
+    return undefined;
   }
 
   parseSubtagContent(tag: XMLInterface.XMLTagWithSubtags, subtagName: string): any {
