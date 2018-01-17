@@ -9,6 +9,7 @@ export default class NamespaceParser {
   static THR_URI = "http://purl.org/syndication/thread/1.0";
   static OPEN_SEARCH_URI = "http://a9.com/-/spec/opensearch/1.1/";
   static FH_URI = "http://purl.org/syndication/history/1.0";
+  static OPF_URI = "http://www.idpf.org/2007/opf";
   static URIS = [
     NamespaceParser.ATOM_URI,
     NamespaceParser.OPDS_URI,
@@ -16,7 +17,8 @@ export default class NamespaceParser {
     NamespaceParser.SCHEMA_URI,
     NamespaceParser.THR_URI,
     NamespaceParser.OPEN_SEARCH_URI,
-    NamespaceParser.FH_URI
+    NamespaceParser.FH_URI,
+    NamespaceParser.OPF_URI,
   ];
   prefixes(feed: any): PrefixMap {
     let prefixMap: PrefixMap = {};

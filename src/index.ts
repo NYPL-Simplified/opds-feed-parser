@@ -9,6 +9,7 @@ import PartialOPDSEntry from "./partial_opds_entry";
 
 import Contributor from "./contributor";
 import Category from "./category";
+import Series from "./series";
 import Summary from "./summary";
 
 import OPDSLink from "./opds_link";
@@ -39,6 +40,7 @@ export {
   Contributor,
   Category,
   Summary,
+  Series,
 
   OPDSLink,
   OPDSCatalogRootLink,
