@@ -38,7 +38,8 @@ describe("LinkParser", () => {
           "href": {"value": "test href"},
           "rel":  {"value": "test rel"},
           "type": {"value": "test type"},
-          "title": {"value": "test title"}
+          "title": {"value": "test title"},
+          "role": {"value": "test role"}
         }
       };
       let parsedLink = parser.parse(link);
@@ -46,9 +47,10 @@ describe("LinkParser", () => {
       expect(parsedLink.rel).to.equals("test rel");
       expect(parsedLink.type).to.equals("test type");
       expect(parsedLink.title).to.equals("test title");
+      expect(parsedLink.role).to.equals("test role");
     });
 
-    it("allows no type and title", () => {
+    it("allows no type, title, and role", () => {
       let link = {
         "$": {
           "href": {"value": "test href"},
@@ -60,6 +62,7 @@ describe("LinkParser", () => {
       expect(parsedLink.rel).to.equals("test rel");
       expect(parsedLink.type).to.be.undefined;
       expect(parsedLink.title).to.be.undefined;
+      expect(parsedLink.role).to.be.undefined;
     });
 
     it("extracts catalog root link", () => {
