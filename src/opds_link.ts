@@ -3,6 +3,7 @@ export default class OPDSLink {
   rel: string;
   type: string;
   title: string;
+  role: string;
 
   constructor(args: OPDSLinkArgs) {
     Object.assign(this, args);
@@ -14,4 +15,5 @@ export interface OPDSLinkArgs {
   type?: string;
   title?: string;
   rel?: string;
+  role?: string;
 }

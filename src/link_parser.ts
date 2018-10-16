@@ -23,6 +23,7 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
     let rel = this.parseAttribute(link, "rel");
     let type = this.parseAttribute(link, "type");
     let title = this.parseAttribute(link, "title");
+    let role = this.parseAttribute(link, "role");
 
     if (rel === OPDSCatalogRootLink.REL) {
        return new OPDSCatalogRootLink({ href, type, title });
@@ -70,7 +71,7 @@ export default class LinkParser extends Xml2jsOutputParser<OPDSLink> {
     } else if (rel === OPDSShelfLink.REL) {
       return new OPDSShelfLink({ href, rel });
     } else {
-      return new OPDSLink({ href, rel, type, title });
+      return new OPDSLink({ href, rel, type, title, role });
     }
   }
 
