@@ -10,6 +10,7 @@ export default class OPDSEntry {
   title: string;
   authors: Array<Contributor>;
   contributors: Array<Contributor>;
+  subtitle: string;
   series: Series;
   links: Array<OPDSLink>;
   categories: Array<Category>;

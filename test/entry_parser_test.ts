@@ -61,6 +61,14 @@ describe("EntryParser", () => {
       expect(parsedAuthor.uri).to.equals("test uri");
     });
 
+    it("extracts subtitle", () => {
+      let entry = {
+        "schema:alternativeHeadline": [{"_": "test subtitle"}]
+      };
+      let parsedEntry = parser.parse(entry);
+      expect(parsedEntry.subtitle).to.equals("test subtitle");
+    });
+
     it("extracts series", () => {
       let series = [{
         "$": {
