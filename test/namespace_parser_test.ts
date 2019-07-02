@@ -1,5 +1,3 @@
-///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
-///<reference path="../typings/main/ambient/chai/chai.d.ts" />
 import NamespaceParser from "../src/namespace_parser";
 import chai = require("chai");
 let expect = chai.expect;

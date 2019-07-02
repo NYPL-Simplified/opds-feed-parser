@@ -7,24 +7,25 @@
     "type": "git",
     "url": "git@github.com:NYPL-Simplified/opds-feed-parser.git"
   },
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "main": "lib/src/index.js",
+  "typings": "lib/test/index.d.ts",
   "license": "Apache-2.0",
   "scripts": {
-    "prepublish": "rm -rf lib; typings install; tsc",
-    "test": "tslint -c tslint.json src/*.ts test/*.ts && mocha test-build/test/*.js",
-    "pretest": "tsc test/*.ts typings/main/ambient/**/*.ts --outDir test-build --module commonjs"
+    "prepublish": "rm -rf lib; tsc",
+    "lint": "tslint -c tslint.json src/*.ts test/*.ts",
+    "test": "rm -rf lib && npm run lint && tsc && mocha lib/test/*.js"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.13.0",
+    "chai": "^3.5.0",
     "fs": "0.0.2",
-    "mocha": "^2.3.4",
-    "tslint": "^3.3.0",
-    "typescript": "^1.7.5",
-    "typings": "^0.6.8"
+    "mocha": "^5.2.0",
+    "tslint": "^3.10.0",
+    "typescript": "^2.7.2"
   },
   "dependencies": {
-    "core-js": "^2.0.3",
+    "core-js": "^2.6.9",
     "requirejs": "^2.1.22",
     "xml2js": "^0.4.16"
   }
