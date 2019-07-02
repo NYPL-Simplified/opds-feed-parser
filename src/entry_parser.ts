@@ -24,6 +24,8 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
     let authors = this.parseSubtags(entry, atomPrefix + "author", contributorParser);
     let contributors = this.parseSubtags(entry, atomPrefix + "contributor", contributorParser);
 
+    let subtitle = this.parseSubtagContent(entry, schemaPrefix + "alternativeHeadline");
+
     let seriesParser = new SeriesParser(this.prefixes);
     let series = this.parseSubtag(entry, schemaPrefix + "Series", seriesParser);
 
@@ -76,6 +78,7 @@ export default class EntryParser extends Xml2jsOutputParser<OPDSEntry> {
        title,
        authors,
        contributors,
+       subtitle,
        series,
        links,
        categories,
