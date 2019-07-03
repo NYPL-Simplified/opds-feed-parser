@@ -1,5 +1,3 @@
-///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
-///<reference path="../typings/main/ambient/chai/chai.d.ts" />
 import PrefixMap from "../src/prefix_map";
 import OPDSAvailability from "../src/opds_availability";
 import AvailabilityParser from "../src/availability_parser";

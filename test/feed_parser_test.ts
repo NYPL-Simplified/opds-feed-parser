@@ -1,5 +1,3 @@
-///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
-///<reference path="../typings/main/ambient/chai/chai.d.ts" />
 import PrefixMap from "../src/prefix_map";
 import FeedParser from "../src/feed_parser";
 import AcquisitionFeed from "../src/acquisition_feed";

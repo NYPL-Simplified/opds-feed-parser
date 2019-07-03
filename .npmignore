@@ -1,4 +1,2 @@
 src/*
-test/*
-test-build/*
-typings/*
+lib/test/*

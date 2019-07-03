@@ -1,6 +1,3 @@
-///<reference path="../typings/main/ambient/mocha/mocha.d.ts" />
-///<reference path="../typings/main/ambient/chai/chai.d.ts" />
-///<reference path="../typings/main/ambient/node/node.d.ts" />
 import OPDSFeed from "../src/opds_feed";
 import {
   NavigationFeed,
@@ -27,8 +24,7 @@ describe("OPDSParser", () => {
   describe("#parse", () => {
     it("raises error when input has no feed or entry", (done) => {
       let opds = "<test></test>";
-      let promise: Promise<OPDSFeed> = parser.parse(opds);
-      promise.then(() => {
+      parser.parse(opds).then(() => {
         done("parser did not raise error for input with no feed");
       }).catch((error) => {
         done();
@@ -38,8 +34,7 @@ describe("OPDSParser", () => {
     it("allows foreign markup", (done) => {
       // http://opds-spec.org/specs/opds-catalog-1-1-20110627/#Document_Extensibility
       let opds = "<feed><test /></feed>";
-      let promise: Promise<OPDSFeed> = parser.parse(opds);
-      promise.then((result) => {
+      parser.parse(opds).then((result) => {
         if (result) {
           done();
         } else {
@@ -55,8 +50,8 @@ describe("OPDSParser", () => {
         if (error) {
           done(error);
         } else {
-          let promise: Promise<OPDSFeed> = parser.parse(data);
-          promise.then((result) => {
+          let promise: Promise<OPDSEntry | OPDSFeed> = parser.parse(data);
+          promise.then((result: OPDSFeed) => {
             expect(result).to.be.an.instanceof(NavigationFeed);
             expect(result).not.to.be.an.instanceof(AcquisitionFeed);
             expect(result.id).to.equals("root.xml");
@@ -87,8 +82,8 @@ describe("OPDSParser", () => {
         if (error) {
           done(error);
         } else {
-          let promise: Promise<OPDSFeed> = parser.parse(data);
-          promise.then((result) => {
+          let promise: Promise<OPDSEntry | OPDSFeed> = parser.parse(data);
+          promise.then((result: OPDSFeed) => {
             expect(result).to.be.an.instanceof(AcquisitionFeed);
             expect(result).not.to.be.an.instanceof(NavigationFeed);
             expect(result.id).to.equals("main.xml");
@@ -126,8 +121,8 @@ describe("OPDSParser", () => {
         if (error) {
           done(error);
         } else {
-          let promise: Promise<OPDSEntry> = parser.parse(data);
-          promise.then((result) => {
+          let promise: Promise<OPDSFeed | OPDSEntry> = parser.parse(data);
+          promise.then((result: OPDSEntry) => {
             expect(result).to.be.an.instanceof(OPDSEntry);
             expect(result).not.to.be.an.instanceof(OPDSFeed);
             expect(result.id).to.equals("urn:librarysimplified.org/terms/id/Overdrive%20ID/135d0478-1ab9-4cc1-a1aa-2aa616b1218c");
