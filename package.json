@@ -1,6 +1,6 @@
 {
   "name": "opds-feed-parser",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "OPDS feed parser",
   "author": "NYPL",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "git@github.com:NYPL-Simplified/opds-feed-parser.git"
   },
   "main": "lib/src/index.js",
-  "typings": "lib/test/index.d.ts",
+  "typings": "lib/src/index.d.ts",
   "license": "Apache-2.0",
   "scripts": {
     "prepublish": "rm -rf lib; tsc",
