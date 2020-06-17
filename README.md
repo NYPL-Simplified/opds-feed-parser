@@ -18,6 +18,8 @@ request("http://feedbooks.github.io/opds-test-catalog/catalog/acquisition/blocks
     promise.then((result) => {
         console.dir(result);
     });
+  }
+);
 ```
 
 ## Setup
