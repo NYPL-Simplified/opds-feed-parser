@@ -21,7 +21,7 @@ request("http://feedbooks.github.io/opds-test-catalog/catalog/acquisition/blocks
 ```
 
 ## Setup
-Requires Node 4.1 or higher.
+Requires Node 20 or higher.
 
 On Mac:
 ```
