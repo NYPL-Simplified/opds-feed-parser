@@ -1,14 +1,16 @@
 # opds-feed-parser
+
 Javascript OPDS feed parser. Covers [OPDS 1.1](http://opds-spec.org/specs/opds-catalog-1-1-20110627/).
 
 
 ## Usage
-```
+
+```sh
 npm install opds-feed-parser
 ```
 
 Example:
-```
+```js
 var Parser = require("opds-feed-parser").default;
 var request = require("request");
 
@@ -21,18 +23,12 @@ request("http://feedbooks.github.io/opds-test-catalog/catalog/acquisition/blocks
 ```
 
 ## Setup
-Requires Node 20 or higher.
 
-On Mac:
-```
-brew install node
-```
+Version `0.1.0` requires Node 20 or higher.
 
-On Ubuntu:
-```
-curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
-sudo apt-get install nodejs
-```
+The previous working version, `0.0.18` can be used with Node version < 18.
+
+It is recommended to use [`nvm`](https://github.com/nvm-sh/nvm) to install different versions of Node needed on your machine.
 
 
 ## License

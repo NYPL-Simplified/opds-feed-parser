@@ -1,6 +1,6 @@
 {
   "name": "opds-feed-parser",
-  "version": "0.1.0-rc",
+  "version": "0.1.0",
   "description": "OPDS feed parser",
   "author": "NYPL",
   "repository": {
